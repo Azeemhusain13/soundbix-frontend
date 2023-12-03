@@ -1,26 +1,28 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template >
+
+  <!-- <HelloWorld ></HelloWorld> -->
+  <!-- <HeaderSoundBix></HeaderSoundBix>
+  <BannerSoundBix></BannerSoundBix> -->
+  <HeaderSoundBix></HeaderSoundBix>
+  <routerView></routerView>
+  <FooterSoundBix></FooterSoundBix>
+  <!-- <RouterLink></RouterLink> -->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import HeaderSoundBix from './components/HeaderSoundBix.vue'
+import FooterSoundBix from './components/FooterSoundBix.vue';
+// import BannerSoundBix from './components/BannerSoundBix.vue'
 
+// import { RouterLink, routerView } from 'vue-router';
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    HeaderSoundBix, FooterSoundBix
+}
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
