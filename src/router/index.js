@@ -4,6 +4,7 @@ import CategoriesSoundBix from '../components/CategoriesSoundBix.vue';
 import DealsSoundBix from '../components/DealsSoundBix'
 import ContactSoundBix from '../components/ContactSoundBix'
 import BannerSoundBix from '../components/BannerSoundBix'
+import CartSoundBix from '../components/CartSoundBix'
 
 const routes=[
     {
@@ -31,6 +32,12 @@ const routes=[
         name: 'banner',
         component: BannerSoundBix
     },
+    {
+        path:'/cart',
+        name: 'cart',
+        component: CartSoundBix
+    },
+
 ]
 
 const router= createRouter({

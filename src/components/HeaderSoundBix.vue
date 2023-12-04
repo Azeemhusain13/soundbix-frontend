@@ -15,6 +15,7 @@
         <router-link to="/deals">DEALS</router-link>
         <router-link to="/contacts">CONTACT</router-link>
         <router-link to="/about">ABOUT</router-link>
+        <router-link to="/cart">CART</router-link>
       </div>
       <!-- Icons -->
       <div class="icons">
