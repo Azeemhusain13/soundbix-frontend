@@ -7,6 +7,7 @@
     <div class="container">
         <div v-for="catProd in product?.productList" :key="catProd">
           <img :src="catProd.productImageUrl" :alt="image" class= "image">
+          <div class="{{product?.categoryName}}"></div>
           <h3 class="productname">{{ catProd.productName }}</h3>
           <p class="productprice">{{ catProd.productPrice }}</p>
         </div>
@@ -28,6 +29,7 @@ setup(){
   rootStore.FETCH_PRODUCTS()
   const products = computed(() => rootStore.products.value)
   console.log(products.value)
+
   return{
     products, 
     SingleProductPage

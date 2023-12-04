@@ -8,7 +8,7 @@
             <img src="@/assets/images/banner1.jpg" alt="" />
             <div class="img-content">
               <span>  </span>
-              <h3 @click="earbuds">Earbuds</h3>
+              <router-link to="/categories">Earbuds</router-link>
             </div>
           </div>
         </div>
@@ -17,13 +17,13 @@
             <div class="img-container">
               <img src="@/assets/images/banner2.jpg" alt="" />
               <div class="img-content">
-                <h3>Headphone</h3>
+                <router-link to="/categories">Headphone</router-link>
               </div>
             </div>
             <div class="img-container">
               <img src="@/assets/images/banner3.jpg" alt="" />
               <div class="img-content">
-                <h3>Speaker</h3>
+                <router-link to="/categories">Speaker</router-link>
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="img-container">
               <img src="@/assets/images/banner4.jpg" alt="" />
               <div class="img-content">
-                <h3>Neckbands</h3>
+                <router-link to="/categories">Neckband</router-link>
               </div>
             </div>
           </div>

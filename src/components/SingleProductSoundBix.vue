@@ -1,3 +1,4 @@
+
 <template>
     <p>
         This is a single product page.
@@ -20,6 +21,18 @@
           <p class="discount-price">₹ 999 <span class="original-price">₹ 2999</span> <span class="off">(Rs. 2000 OFF)</span></p>
           <p class="seller">Seller: Flashtech Retail</p>
           </div>
+
+          <div class="dropdown">
+            <label for="Qty : "> Qty : </label>
+            <select>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+              <option value="">4</option>
+              <option value="">5</option>
+            </select>
+          </div>
+        
           <button class="add-to-cart-btn">Add to Cart</button>
           <h3>Specification</h3>
           <table class="specifications-table">
@@ -44,6 +57,7 @@
     <script>
     export default {
         setup() {
+
           return {
           productImages: [
             "banner1.jpg",
@@ -149,4 +163,37 @@
       padding: 8px;
       text-align: left;
     }
+
+    form {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.value-button {
+  display: inline-block;
+  border: 1px solid #ddd;
+  margin: 0px;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 11px 0;
+  background: #eee;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+.dropdown{
+    padding: 20px;
+}
+
     </style>
