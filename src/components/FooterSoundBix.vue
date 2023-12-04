@@ -2,13 +2,7 @@
 <template><footer class="footer">
     <div class="footer-logo">SoundBix</div>
 
-    <div class="footer-links">
-        <router-link to="/banner">HOME</router-link>
-        <router-link to="/categories">CATEGORIES</router-link>
-        <router-link to="/deals">DEALS</router-link>
-        <router-link to="/contacts">CONTACT</router-link>
-        <router-link to="/about">ABOUT</router-link>
-    </div>
+  
 
     <div class="footer-social">
       <a href="#" >Facebook</a>

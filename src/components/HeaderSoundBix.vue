@@ -10,12 +10,12 @@
       </div>
       <!-- Links -->
       <div class="links">
-        <router-link to="/banner">HOME</router-link>
+        <router-link to="/">HOME</router-link>
         <router-link to="/categories">CATEGORIES</router-link>
         <router-link to="/deals">DEALS</router-link>
         <router-link to="/contacts">CONTACT</router-link>
         <router-link to="/about">ABOUT</router-link>
-        <router-link to="/cart">CART</router-link>
+        <!-- <router-link to="/cart">CART</router-link> -->
       </div>
       <!-- Icons -->
       <div class="icons">
@@ -41,6 +41,7 @@
             />
           </svg>
         </span>
+        <router-link to="/cart">
         <span class="icon">
           <svg
             width="18"
@@ -56,7 +57,7 @@
               stroke-linejoin="round"
             />
           </svg>
-        </span>
+        </span></router-link>
       </div>
     </div>
   </nav>

@@ -5,6 +5,7 @@ import DealsSoundBix from '../components/DealsSoundBix'
 import ContactSoundBix from '../components/ContactSoundBix'
 import BannerSoundBix from '../components/BannerSoundBix'
 import CartSoundBix from '../components/CartSoundBix'
+import SingleProductSoundBix from '../components/SingleProductSoundBix.vue'
 
 const routes=[
     {
@@ -28,7 +29,7 @@ const routes=[
         component: ContactSoundBix
     },
     {
-        path:'/banner',
+        path:'/',
         name: 'banner',
         component: BannerSoundBix
     },
@@ -37,6 +38,11 @@ const routes=[
         name: 'cart',
         component: CartSoundBix
     },
+    {
+    path:'/singlepageproduct',
+    name: 'singlepageproduct',
+    component: SingleProductSoundBix
+}
 
 ]
 
