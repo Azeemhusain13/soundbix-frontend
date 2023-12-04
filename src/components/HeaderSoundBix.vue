@@ -82,9 +82,12 @@ nav .nav-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: calc(1440px - 170px);
   width: 100%;
+  position: fixed;
   margin: auto;
+  z-index: 5;
+  background-color: #FFFFFF;
+  box-shadow:0px 3px 5px #F3F3F3;
 }
 .nav-inner .links a {
   margin: 0px 16px;

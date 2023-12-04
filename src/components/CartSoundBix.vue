@@ -30,8 +30,7 @@
     <div class="available-products">
 
       <h2>Available Products</h2>
-      <ul>
-        
+      <ul>   
         <li v-for="(product, index) in product" :key="index">
           <img :src="product.productImageUrl" :alt="product.productName" class="product-image" />
             <div class = "prod-details">
