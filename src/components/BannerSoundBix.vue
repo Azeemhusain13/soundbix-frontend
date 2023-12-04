@@ -8,11 +8,10 @@
             <img src="@/assets/images/banner1.jpg" alt="" />
             <div class="img-content">
               <span>  </span>
-              <h3>Earbuds</h3>
+              <h3 @click="earbuds">Earbuds</h3>
             </div>
           </div>
         </div>
-
         <div class="category-banner">
           <div class="top">
             <div class="img-container">
@@ -38,15 +37,22 @@
           </div>
         </div>
       </div>
-  
-         
-        </div>
-      </div>
-
-
-
+ </div>
+</div>
 </template>
 <script>
+import { defineComponent } from 'vue';
+import router from '@/router'
+export default defineComponent({
+  setup(){
+    const earbuds=()=>{
+      router.push('')
+    };
+return {
+earbuds
+  }  
+},
+})
 </script>
 
 <style>
@@ -56,6 +62,7 @@ img {
 .banner {
   border-bottom: 2px solid #f8f8f8;
   margin-bottom: 100px;
+  margin-top: 115px;
 }
 .banner .container {
   max-width: calc(1440px - 130px);
