@@ -5,9 +5,8 @@
   
 
     <div class="footer-social">
-      <a href="#" >Facebook</a>
-      <a href="#" >Twitter</a>
-      <a href="#">Instagram</a>
+      <router-link to="/contacts">CONTACT</router-link>
+        <router-link to="/about">ABOUT</router-link>
     </div>
 
     <div class="footer-disclaimer">

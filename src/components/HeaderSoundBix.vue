@@ -12,8 +12,6 @@
       <div class="links">
         <router-link to="/">HOME</router-link>
         <router-link to="/categories">CATEGORIES</router-link>
-        <router-link to="/contacts">CONTACT</router-link>
-        <router-link to="/about">ABOUT</router-link>
         <router-link to="/searchpageproduct">Search</router-link>
       </div>
       <!-- Icons -->
@@ -41,35 +39,50 @@
             />
           </svg>
         </span></router-link>
-        <router-link to="/cart">
-        <span class="icon">
-          <svg
-            width="18"
-            height="20"
-            viewBox="0 0 18 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M13 9V5C13 3.93913 12.5786 2.92172 11.8284 2.17157C11.0783 1.42143 10.0609 1 9 1C7.93913 1 6.92172 1.42143 6.17157 2.17157C5.42143 2.92172 5 3.93913 5 5V9H13ZM2 7H16L17 19H1L2 7Z"
-              stroke="#121212"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </span></router-link>
+        <button @click="getUserCart">
+          <router-link to="/cart">
+            <span class="icon">
+              <svg
+                width="18"
+                height="20"
+                viewBox="0 0 18 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 9V5C13 3.93913 12.5786 2.92172 11.8284 2.17157C11.0783 1.42143 10.0609 1 9 1C7.93913 1 6.92172 1.42143 6.17157 2.17157C5.42143 2.92172 5 3.93913 5 5V9H13ZM2 7H16L17 19H1L2 7Z"
+                  stroke="#121212"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg> </span
+          ></router-link>
+        </button>
       </div>
     </div>
   </nav>
 
 </template>
 <script>
-
+import router from '@/router';
 export default {
   name: 'HeaderSoundBix',
   props: {
     msg: String
+  },
+  setup(){
+   const getUserCart = ()=>{
+    router.push({
+  name:"cart",
+    query:{
+      userId:1
+    }
+})
   }
+  return{
+    getUserCart
+  }
+}
 }
 </script>
 <style>
@@ -129,5 +142,59 @@ nav .nav-inner {
  a :hover {
   background-color:#04AA6D ;
 }
+/* @media (width < 400px) {
+  .links{
+    display: block;
+    flex-wrap: wrap;
+    text-align: left;
 
+  }
+  .search-container{
+    display: none;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+
+@media (max-width: 400px) {
+  .nav-inner {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .links a {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px; 
+    margin-bottom: 5px; 
+  }
+  .search-container {
+    margin-top: 10px;
+    padding: 10px; /* Adjust as needed */
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .icons {
+    margin-top: 10px; /* Adjust as needed */
+  }}
 </style>

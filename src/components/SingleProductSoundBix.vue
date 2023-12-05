@@ -1,25 +1,11 @@
-
 <template>
-
-
-          
-        <!-- This is a single product page.
-
-              <div class="right-column">
-                <div class="product-description">
-                  <img :src="Product.productImageUrl?.[0]" alt=""/>  
-                      <h2>{{ Product.productName }}</h2>
-                      <h2>{{ Product.productDescription}}</h2>
-                      <h2>{{ Product.productPrice }}</h2>
-                </div>
-             </div> -->
     <div class="product-page">
         <div class="product-gallery">
         <img :src="Product.productImageUrl" alt=""/>  
         </div>
         <div class="product-details">
       <h1 class="product-title">{{ Product.productName }}</h1>
-      <h6 class="category font-italic">{{ Product.category.categoryName }}</h6>
+      <!-- <h6 class="category font-italic">{{ Product.category.categoryName }}</h6> -->
       <p class="product-description">
         {{ Product.productDescription}}
       </p>
@@ -78,7 +64,6 @@ setup() {
   };
 
     const rootStore = useRootStore();
-   // const Product ={}
     const id = ref(0);
     const route = useRoute()
     id.value = route.params.id

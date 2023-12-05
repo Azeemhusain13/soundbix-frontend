@@ -39,13 +39,26 @@ import { reactive } from "vue";
     }
     const allproducts = reactive({value:{}})
     const FETCH_ALLPRODUCTS = async ()=>{
-    const res = await fetch('http://10.20.3.178:8081/product/get-all-product');
-    const jsonew = await res.json();
+    const res3 = await fetch('http://10.20.3.178:8081/product/get-all-product');
+    const jsonew = await res3.json();
     products.value = {...jsonew}
     console.log(products.value)
     }
+
+    const cart = reactive({ value: {} });
+    const FETCH_CART = async (userId) => {
+        console.log(userId)
+        const res2 = await fetch(`http://10.20.3.151:8060/cart/cartOfUser?userId=${userId}`);
+        const jsonew2 = await res2.json();
+        cart.value = { ...jsonew2 };
+        console.log(cart.value);
+    };
+
+    
     return {
      posts,
+     cart,
+     FETCH_CART,
      FETCH_PRODUCTS,
      products,
      products1,
