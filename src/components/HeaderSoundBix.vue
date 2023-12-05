@@ -14,10 +14,11 @@
         <router-link to="/categories">CATEGORIES</router-link>
         <router-link to="/contacts">CONTACT</router-link>
         <router-link to="/about">ABOUT</router-link>
-        <!-- <router-link to="/cart">CART</router-link> -->
+        <router-link to="/searchpageproduct">Search</router-link>
       </div>
       <!-- Icons -->
       <div class="icons">
+        <router-link to="/login">
         <span class="icon">
           <svg
             width="16"
@@ -39,7 +40,7 @@
               stroke-linejoin="round"
             />
           </svg>
-        </span>
+        </span></router-link>
         <router-link to="/cart">
         <span class="icon">
           <svg
