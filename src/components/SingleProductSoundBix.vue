@@ -40,7 +40,7 @@
             </select>
           </div>
         
-          <button class="add-to-cart-btn">Add to Cart</button>
+          <button class="add-to-cart-btn" @click="AddToCart()">Add to Cart</button>
           <h3>Specification</h3>
           <table class="specifications-table">
           <tr>
@@ -66,9 +66,16 @@
 import {computed, ref , defineComponent} from "vue";
 import { useRoute } from "vue-router";
 import useRootStore from '@/store/index';
+import router from "@/router";
 
 export default defineComponent({
 setup() {
+
+
+  const AddToCart = () => {
+    console.log("called")
+    router.push('/cart')
+  };
 
     const rootStore = useRootStore();
    // const Product ={}
@@ -87,7 +94,7 @@ setup() {
           //   "banner3.jpg",
           //   "banner4.jpg"
           // ], 
-          Product
+          Product, AddToCart
         }
     }
     })
