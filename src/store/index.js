@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
+import { reactive, ref } from "vue";
  
  const useRootStore = defineStore('root', () => {
  
@@ -27,6 +28,16 @@ import { reactive } from "vue";
     products1.value = {...jsonew1}
     console.log(products1.value)
     }
+
+    const merchants =  ref([])
+        const FETCH_MERCHANTS_BY_ID = async (productId)=>{
+            const res1 = await fetch(`http://10.20.3.173:8097/productInventory/get-merchants-by-product-id/${productId}`);
+           
+            const jsonew1 = await res1.json();
+            // console.log(jsonew1)
+           merchants.value = jsonew1
+        //    console.log(merchants.value)
+        }
  
     
 
@@ -58,6 +69,8 @@ import { reactive } from "vue";
     return {
      posts,
      cart,
+     merchants,
+     FETCH_MERCHANTS_BY_ID,
      FETCH_CART,
      FETCH_PRODUCTS,
      products,
