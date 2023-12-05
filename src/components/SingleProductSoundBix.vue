@@ -1,24 +1,31 @@
 
 <template>
-    <p>
-        This is a single product page.
-    </p>
+
+
+          
+        <!-- This is a single product page.
+
+              <div class="right-column">
+                <div class="product-description">
+                  <img :src="Product.productImageUrl?.[0]" alt=""/>  
+                      <h2>{{ Product.productName }}</h2>
+                      <h2>{{ Product.productDescription}}</h2>
+                      <h2>{{ Product.productPrice }}</h2>
+                </div>
+             </div> -->
     <div class="product-page">
         <div class="product-gallery">
-          <img v-for="(image, index) in productImages" :src="require(`@/assets/images/${image}`)" :alt="'Product Image ' + (index + 1)" :key="index" />
+        <img :src="Product.productImageUrl" alt=""/>  
         </div>
         <div class="product-details">
-      <h1 class="product-title">Boat Neckband</h1>
-      <h6 class="category font-italic">Headsets</h6>
+      <h1 class="product-title">{{ Product.productName }}</h1>
+      <h6 class="category font-italic">{{ Product.category.categoryName }}</h6>
       <p class="product-description">
-        Elevate your audio experience with the Boat Neckband. These wireless headsets provide high-quality sound and comfort for extended use.
-        Whether you're on the go or relaxing at home, the Boat Neckband delivers crisp and clear audio. With features like Bluetooth connectivity and long battery life,
-        it's the perfect companion for music enthusiasts. The neckband design ensures a secure fit, while the in-line controls make it easy to manage your music and calls.
-        Immerse yourself in your favorite tunes with the Boat Neckband.
+        {{ Product.productDescription}}
       </p>
           <p class="rating">Rating: ★★★★☆</p>
           <div class="additional-details">
-          <p class="discount-price">₹ 999 <span class="original-price">₹ 2999</span> <span class="off">(Rs. 2000 OFF)</span></p>
+          <p class="discount-price">Rs. {{Product.productPrice}} </p>
           <p class="seller">Seller: Flashtech Retail</p>
           </div>
 
@@ -37,8 +44,8 @@
           <h3>Specification</h3>
           <table class="specifications-table">
           <tr>
-            <td>Color</td>
-            <td>White & Beige</td>
+            <td>Brand</td>
+            <td>{{Product.productBrand}}</td>
           </tr>
           <tr>
             <td>Material</td>
@@ -48,26 +55,42 @@
             <td>Closure</td>
             <td>Lace-Up</td>
           </tr>
-        </table>
+        </table> 
         </div>
-      </div>
+       </div>
     
     </template>
     
     <script>
-    export default {
-        setup() {
+
+import {computed, ref , defineComponent} from "vue";
+import { useRoute } from "vue-router";
+import useRootStore from '@/store/index';
+
+export default defineComponent({
+setup() {
+
+    const rootStore = useRootStore();
+   // const Product ={}
+    const id = ref(0);
+    const route = useRoute()
+    id.value = route.params.id
+     rootStore.FETCH_PRODUCTS_BY_ID(id.value)
+    // const rootStore = useRootStore();
+    // rootStore.FETCH_POST()
+    const Product = computed(() => rootStore.products1.value)
 
           return {
-          productImages: [
-            "banner1.jpg",
-            "banner2.jpg",
-            "banner3.jpg",
-            "banner4.jpg"
-          ]
+          // productImages: [
+          //   "banner1.jpg",
+          //   "banner2.jpg",
+          //   "banner3.jpg",
+          //   "banner4.jpg"
+          // ], 
+          Product
         }
     }
-    };
+    })
     </script>
     
     <style scoped>
@@ -75,6 +98,7 @@
         display: flex;
         max-width: 1400px;
         margin: 20px auto;
+        margin-top: 90px;
     }
     
     .product-gallery {

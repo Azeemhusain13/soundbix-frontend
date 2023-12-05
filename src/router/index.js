@@ -45,7 +45,7 @@ const routes=[
         component: LoginComponent
     },
     {
-    path:'/singlepageproduct',
+    path:'/singlepageproduct/:id',
     name: 'singlepageproduct',
     component: SingleProductSoundBix
    },

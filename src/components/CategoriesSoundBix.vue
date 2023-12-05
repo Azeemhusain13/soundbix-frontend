@@ -2,10 +2,10 @@
     <!-- <li v-for="item in product" :key="item.productId">
       {{ item.title }}</li> -->
   <div class="card1">
-  <div  v-for="product in products"  :key="product.productId" @click="SingleProductPage" >
+  <div  v-for="product in products"  :key="product.productId"  >
     <h2>Bestselling affordable {{ product?.categoryName }}</h2>
     <div class="container">
-        <div class ="card" v-for="catProd in product?.productList" :key="catProd">
+        <div class ="card" v-for="catProd in product?.productList" :key="catProd" @click="SingleProductPage( catProd.productId)">
           <img :src="catProd.productImageUrl" :alt="image" class= "image">
           <div class="{{product?.categoryName}}"></div>
           <h3 class="productname">{{ catProd.productName }}</h3>
@@ -16,19 +16,24 @@
   </div>
 </template>
 <script>
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, watch } from 'vue';
 import router from '@/router'
 import useRootStore from '@/store/index.js'
 export default defineComponent({
 
 setup(){   
-  const SingleProductPage = () => {
-    router.push("/singlepageproduct");
+
+  const SingleProductPage = (productId) => {
+    console.log("called")
+    console.log(productId)
+    router.push(`/singlepageproduct/${productId}`);
   };
   const rootStore = useRootStore()
   rootStore.FETCH_PRODUCTS()
   const products = computed(() => rootStore.products.value)
-  console.log(products.value)
+  watch(products.value,()=>{
+    console.log(products.value)
+  })
 
   return{
     products, 

@@ -19,6 +19,14 @@ import { reactive } from "vue";
     products.value = {...jsonew}
     console.log(products.value)
     }
+    const products1 = reactive({value:{}})
+
+    const FETCH_PRODUCTS_BY_ID = async (productId)=>{
+     const res1 = await fetch(`http://10.20.3.178:8081/product/get-product-by-id/${productId}`);
+     const jsonew1 = await res1.json();
+    products1.value = {...jsonew1}
+    console.log(products1.value)
+    }
  
     const productss = reactive({value:{}})
     const FETCH_PRODUCTSS = async ()=>{
@@ -28,13 +36,22 @@ import { reactive } from "vue";
     console.log(products.value)
     }
 
+    const login = reactive ({value: {}})
+    const FETCH_LOGIN = async ()=>{
+        const res = await fetch('http://10.20.3.178:8081/auth/login');
+        const jsonew = await res.json();
+        login.value ={...jsonew}
+        console.log(login.value)
+    }
+
     return {
      posts,
      FETCH_PRODUCTS,
      products,
      productss,
+     products1,
      FETCH_POST,
-     FETCH_PRODUCTSS
+     FETCH_PRODUCTSS, FETCH_LOGIN, login, FETCH_PRODUCTS_BY_ID,
     }
 })
 
