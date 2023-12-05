@@ -3,7 +3,7 @@
     <div class="nav-inner">
       <!-- Logo -->
       <div class="logo">
-        <img src="@/assets/images/SoundBixLogo.png" alt="" width="98" height="73"/>
+       SoundBix
       </div>
       <div class="search-container">
             <input type="text" class="search-box" placeholder="Search...">
@@ -12,12 +12,12 @@
       <div class="links">
         <router-link to="/">HOME</router-link>
         <router-link to="/categories">CATEGORIES</router-link>
-        <router-link to="/searchpageproduct">Search</router-link>
+        <router-link to="/searchpageproduct">PRODUCT</router-link>
       </div>
       <!-- Icons -->
-      <div class="icons">
-        <router-link to="/login">
-        <span class="icon">
+      <div class="iconss"> 
+        <router-link to="/login"> LOGIN</router-link></div>
+        <!-- <span class="icon">
           <svg
             width="16"
             height="20"
@@ -38,10 +38,11 @@
               stroke-linejoin="round"
             />
           </svg>
-        </span></router-link>
+        </span>--->
+     
         <button @click="getUserCart">
           <router-link to="/cart">
-            <span class="icon">
+            <span class="icons">
               <svg
                 width="18"
                 height="20"
@@ -59,7 +60,6 @@
           ></router-link>
         </button>
       </div>
-    </div>
   </nav>
 
 </template>
@@ -87,11 +87,33 @@ export default {
 </script>
 <style>
 
+.links {
+  color: #3498db; 
+  text-decoration: none; 
+}
+
+.logo {
+  font-family: sans-serif; 
+  font-weight: bold; 
+  color: white; 
+  text-transform: uppercase; 
+  letter-spacing: 2px;
+  padding: 10px;
+  font-size: 30px;
+  margin-left: 50px;
+}
+
+.iconss{
+  background-color: 	#ff9900;
+  padding: 12px;
+  border-radius: 10%;
+}
+
 nav {
   border-bottom: 2px solid #f8f8f8;
 }
 nav .nav-inner {
-  height: 90px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -101,6 +123,7 @@ nav .nav-inner {
   z-index: 5;
   background-color: #FFFFFF;
   box-shadow:0px 3px 5px #F3F3F3;
+  background-color: #282828;
 }
 .nav-inner .links a {
   margin: 0px 16px;
@@ -108,9 +131,10 @@ nav .nav-inner {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
-  color: #121212;
+  color: white;
   border-bottom: 1px solid transparent;
   transition: 0.3s;
+  text-decoration: none;
 }
 .nav-inner .links a:hover {
   border-color: #121212;
@@ -119,6 +143,9 @@ nav .nav-inner {
 .icons{
     display: flex;
     align-items: center;
+    color: black;
+    padding: 17px;
+    margin-right: 10px;
 }
 .icons span {
   margin: 0 13px;
@@ -131,16 +158,17 @@ nav .nav-inner {
       position: relative;
     }
 
-    .search-box {
+.search-box {
       padding: 10px;
-      width: 300px;
+      width: 500px;
       border: 1px solid #ccc;
       border-radius: 5px;
       outline: none;
     }
 
- a :hover {
-  background-color:#04AA6D ;
+ a {
+  text-decoration: none;
+  color:white;
 }
 /* @media (width < 400px) {
   .links{
@@ -170,6 +198,8 @@ nav .nav-inner {
   .links {
     display: flex;
     flex-direction: row;
+    margin-top: -88px;
+    color: black;
   }
 
   .links a {
@@ -177,6 +207,8 @@ nav .nav-inner {
     box-sizing: border-box;
     padding: 10px; 
     margin-bottom: 5px; 
+    margin-top: -88px;
+    
   }
   .search-container {
     margin-top: 10px;
@@ -195,6 +227,7 @@ nav .nav-inner {
   }
 
   .icons {
-    margin-top: 10px; /* Adjust as needed */
+    margin-top: 10px; 
+    /* Adjust as needed */
   }}
 </style>

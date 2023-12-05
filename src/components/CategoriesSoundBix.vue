@@ -3,13 +3,13 @@
       {{ item.title }}</li> -->
   <div class="card1">
   <div  v-for="product in products"  :key="product.productId"  >
-    <h2>Bestselling affordable {{ product?.categoryName }}</h2>
+    <h2 >{{ product?.categoryName }}</h2>
     <div class="container">
         <div class ="card" v-for="catProd in product?.productList" :key="catProd" @click="SingleProductPage( catProd.productId)">
           <img :src="catProd.productImageUrl" :alt="image" class= "image">
           <div class="{{product?.categoryName}}"></div>
           <h3 class="productname">{{ catProd.productName }}</h3>
-          <p class="productprice">{{ catProd.productPrice }}</p>
+          <p class="productprice">Rs.{{ catProd.productPrice }}</p>
         </div>
     </div>
   </div>
@@ -44,6 +44,15 @@ setup(){
   </script>
 
   <style>
+
+h2{
+  font-family: 'Your Chosen Font', sans-serif;
+  text-transform: uppercase; 
+  letter-spacing: 2px; 
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
 
 .image{
     height: 200px;

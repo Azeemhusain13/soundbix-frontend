@@ -5,33 +5,33 @@
       <div class="banner-content">
         <div class="main-banner">
           <div class="img-container">
-            <img src="@/assets/images/banner1.jpg" alt="" />
+            <router-link to="/categories"> <img src="@/assets/images/banner1.jpg" alt="" /></router-link>
             <div class="img-content">
               <span>  </span>
-              <router-link to="/categories">Earbuds</router-link>
+              <!-- <router-link to="/categories">Earbuds</router-link> -->
             </div>
           </div>
         </div>
         <div class="category-banner">
           <div class="top">
             <div class="img-container">
-              <img src="@/assets/images/banner2.jpg" alt="" />
+              <router-link to="/categories"> <img src="@/assets/images/banner2.jpg" alt="" /></router-link>
               <div class="img-content">
-                <router-link to="/categories">Headphone</router-link>
+                <!-- <router-link to="/categories">Headphone</router-link> -->
               </div>
             </div>
             <div class="img-container">
-              <img src="@/assets/images/banner3.jpg" alt="" />
+              <router-link to="/categories">  <img src="@/assets/images/banner3.jpg" alt="" /></router-link>
               <div class="img-content">
-                <router-link to="/categories">Speaker</router-link>
+                <!-- <router-link to="/categories">Speaker</router-link> -->
               </div>
             </div>
           </div>
           <div class="bottom">
             <div class="img-container">
-              <img src="@/assets/images/banner4.jpg" alt="" />
+              <router-link to="/categories"> <img src="@/assets/images/banner4.jpg" alt="" /></router-link>
               <div class="img-content">
-                <router-link to="/categories">Neckband</router-link>
+                <!-- <router-link to="/categories">Neckband</router-link> -->
               </div>
             </div>
           </div>
@@ -59,6 +59,10 @@ earbuds
 img {
   height: 100%;
 }
+img:hover{
+/* box-shadow: 0 0 1px 1px #565656; */
+transform: scale(1.1);}
+
 .banner {
   border-bottom: 2px solid #f8f8f8;
   margin-bottom: 100px;
@@ -94,10 +98,10 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #ffffff;
+  /* background: #ffffff;
   border-radius: 4px;
   padding: 10px 25px;
-  text-align: center;
+  text-align: center; */
 }
 .img-content span {
   font-weight: 600;
