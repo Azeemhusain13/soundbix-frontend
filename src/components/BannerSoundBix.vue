@@ -57,7 +57,7 @@ earbuds
 
 <style>
 img {
-  height: 50%;
+  height: 100%;
 }
 .banner {
   border-bottom: 2px solid #f8f8f8;
