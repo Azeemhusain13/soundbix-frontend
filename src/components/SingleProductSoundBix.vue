@@ -1,8 +1,8 @@
 <template>
     <div class="product-page">
-        <div class="product-gallery">
+        
         <img :src="Product.productImageUrl" alt=""/>  
-        </div>
+        
         <div class="product-details">
       <h1 class="product-title">{{ Product.productName }}</h1>
       <!-- <h6 class="category font-italic">{{ Product.category.categoryName }}</h6> -->
@@ -25,8 +25,7 @@
               <option value="">5</option>
             </select>
           </div>
-        
-          <button class="add-to-cart-btn" @click="AddToCart()">Add to Cart</button>
+         <button class="add-to-cart-btn" @click="AddToCart()">Add to Cart</button>
           <h3>Specification</h3>
           <table class="specifications-table">
           <tr>
@@ -56,8 +55,6 @@ import router from "@/router";
 
 export default defineComponent({
 setup() {
-
-
   const AddToCart = () => {
     console.log("called")
     router.push('/cart')
@@ -67,19 +64,17 @@ setup() {
     const id = ref(0);
     const route = useRoute()
     id.value = route.params.id
-     rootStore.FETCH_PRODUCTS_BY_ID(id.value)
+
+    rootStore.FETCH_PRODUCTS_BY_ID(id.value)
+     
+        
     // const rootStore = useRootStore();
     // rootStore.FETCH_POST()
     const Product = computed(() => rootStore.products1.value)
 
           return {
-          // productImages: [
-          //   "banner1.jpg",
-          //   "banner2.jpg",
-          //   "banner3.jpg",
-          //   "banner4.jpg"
-          // ], 
-          Product, AddToCart
+          Product, 
+          AddToCart
         }
     }
     })
@@ -130,7 +125,7 @@ setup() {
     }
     
     .additional-details {
-      text-align: center;
+      text-align: left;
     }
     
     .discount-price {
@@ -138,8 +133,7 @@ setup() {
       font-weight: bold;
       margin-bottom: 5px;
     }
-    
-    .original-price {
+  .original-price {
         font-size: 15px;
         color: #393838;
       text-decoration: line-through;

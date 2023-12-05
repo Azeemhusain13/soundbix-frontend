@@ -5,8 +5,7 @@
       <ul>
         <li
           v-for="(product, index) in cartItems" :key="index"
-          class="cart-item"
-        >
+          class="cart-item">
           <img :src="product.productImageUrl"
             alt="Product Image"
             class="product-image"
@@ -32,8 +31,7 @@
         </li>
       </ul>
     </div>
- 
-    <div class="cart-summary">
+  <div class="cart-summary">
       <h2>Order Summary</h2>
       <p>Total Items: {{ cartItems.length }}</p>
       <p>Total Price: {{ totalPrice }}</p>
@@ -46,25 +44,23 @@
 <script>
 import { computed, ref, watch } from "vue";
 import useRootStore from "@/store/index";
-import { useRoute } from "vue-router";
+//import { useRoute } from "vue-router";
  
 export default {
   setup() {
-    const route = useRoute();
+    //const route = useRoute();
     const id = ref(0);
- 
     const totalPrice = ref(0)
-    id.value = route.query.userId;
+    id.value = 1
     const userRoot = useRootStore();
     console.log(id.value)
     userRoot.FETCH_CART(id.value);
     const cartItems = computed(() => userRoot.cart.value)
- 
+    console.log(cartItems.value)
     const removeFromCart = (key) => {
       delete cartItems.value[key];
     };
- 
-    const calculateTotalPrice = () => {
+   const calculateTotalPrice = () => {
       for( let key in cartItems.value) {
         totalPrice.value += Number(cartItems.value[key].productPrice)
       }
@@ -79,13 +75,12 @@ export default {
     // });
  
     watch(() => cartItems.value, () => {
+
       calculateTotalPrice()
     }, {
       immediate: true,
       deep: true
     })
-    
- 
     return {
       cartItems,
       removeFromCart,

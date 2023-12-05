@@ -1,226 +1,30 @@
 <template>
 <div class ="product-container">
-  <div v-for="(product, index) in products" :key="index" class="product">
+  <div v-for="(product, index) in products" :key="index" class="product" @click="SingleProductPage(product.productId)">
     <img :src="product.productImageUrl" alt="Product Image" />
     <h3>{{ product.productName }}</h3>
     <p class ="brand">{{ product.productBrand }}</p>
-    <p class ="product-price">${{ product.productPrice }}</p>
-
-  <div class="category">
-      <p>Offer: {{ product.category.categoryOffer }}%</p>
-    </div>
+    <p class ="product-price">OfferedPrice: Rs {{ product.productPrice }} /-</p>
   </div>
 </div>
-<div class="container">
-    <div class="slider-wrapper">
-      <div class="slider">
-        <img v-for="(product, index) in images" :key="index" :src="product.productImageUrl" :alt="'Slide ' + (index + 1)" />
-      </div>
-      <div class="slider-nav">
-        <a v-for="(product, index) in images" :key="index" :href="'#slide-' + (index + 1)"></a>
-      </div>
-    </div>
-  </div>
-
 </template>
 <script>
 
-import {  defineComponent } from 'vue';
+import {  computed,defineComponent } from 'vue';
 import router from '@/router'
-//import useRootStore from '@/store/index.js'
+import useRootStore from '@/store/index.js'
 export default defineComponent({
 
 setup(){   
-  const SingleProductPage = () => {
-    router.push("/singlepageproduct");
+  const SingleProductPage = (productId) => {
+    console.log("called")
+    console.log(productId)
+    router.push(`/singlepageproduct/${productId}`);
   };
-  // const rootStore = useRootStore()
-  // rootStore.FETCH_PRODUCTSS()
-  
-
-  const products = [
-    {
-        "productId": "4ce4ee0e-a204-447e-918d-84423c1cba21",
-        "productName": "boat zy",
-        "productDescription": "string",
-        "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-        "productBrand": "string",
-        "productPrice": "2000",
-        "category": {
-            "categoryName": "headphone",
-            "categoryOffer": 20,
-            "productList": [
-                {
-                    "productId": "4ce4ee0e-a204-447e-918d-84423c1cba21",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                },
-                {
-                    "productId": "5a310f1f-c71a-4f0e-aa94-b9b14134b271",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                }
-            ]
-        }
-    },
-    {
-        "productId": "5a310f1f-c71a-4f0e-aa94-b9b14134b271",
-        "productName": "boat zy",
-        "productDescription": "string",
-        "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-        "productBrand": "string",
-        "productPrice": "2000",
-        "category": {
-            "categoryName": "headphone",
-            "categoryOffer": 20,
-            "productList": [
-                {
-                    "productId": "4ce4ee0e-a204-447e-918d-84423c1cba21",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                },
-                {
-                    "productId": "5a310f1f-c71a-4f0e-aa94-b9b14134b271",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                }
-            ]
-        }
-    },
-    {
-        "productId": "6dbd7486-8ce6-48d1-9619-4633a221076b",
-        "productName": "boat zy",
-        "productDescription": "string",
-        "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-        "productBrand": "string",
-        "productPrice": "2000",
-        "category": {
-            "categoryName": "neckband",
-            "categoryOffer": 10,
-            "productList": [
-                {
-                    "productId": "6dbd7486-8ce6-48d1-9619-4633a221076b",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                },
-                {
-                    "productId": "e1ce30a1-121c-4a80-89a8-aaeb9d3e0a63",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                }
-            ]
-        }
-    },
-    {
-        "productId": "e1ce30a1-121c-4a80-89a8-aaeb9d3e0a63",
-        "productName": "boat zy",
-        "productDescription": "string",
-        "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-        "productBrand": "string",
-        "productPrice": "2000",
-        "category": {
-            "categoryName": "neckband",
-            "categoryOffer": 10,
-            "productList": [
-                {
-                    "productId": "6dbd7486-8ce6-48d1-9619-4633a221076b",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                },
-                {
-                    "productId": "e1ce30a1-121c-4a80-89a8-aaeb9d3e0a63",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                }
-            ]
-        }
-    },
-    {
-        "productId": "7fc453af-85b3-434e-b6da-0a8b2392f4d7",
-        "productName": "boat zy",
-        "productDescription": "string",
-        "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-        "productBrand": "string",
-        "productPrice": "2000",
-        "category": {
-            "categoryName": "earbuds",
-            "categoryOffer": 10,
-            "productList": [
-                {
-                    "productId": "7fc453af-85b3-434e-b6da-0a8b2392f4d7",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                },
-                {
-                    "productId": "d2736fa3-883f-4615-9d34-5eb3b021d49e",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                }
-            ]
-        }
-    },
-    {
-        "productId": "d2736fa3-883f-4615-9d34-5eb3b021d49e",
-        "productName": "boat zy",
-        "productDescription": "string",
-        "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-        "productBrand": "string",
-        "productPrice": "2000",
-        "category": {
-            "categoryName": "earbuds",
-            "categoryOffer": 10,
-            "productList": [
-                {
-                    "productId": "7fc453af-85b3-434e-b6da-0a8b2392f4d7",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                },
-                {
-                    "productId": "d2736fa3-883f-4615-9d34-5eb3b021d49e",
-                    "productName": "boat zy",
-                    "productDescription": "string",
-                    "productImageUrl": "https://m.media-amazon.com/images/I/5171kgKguGL._SX679_.jpg",
-                    "productBrand": "string",
-                    "productPrice": "2000"
-                }
-            ]
-        }
-    }
-]
-  console.log(products.values)
+const rootStore = useRootStore()
+rootStore.FETCH_ALLPRODUCTS();
+const products = computed(() => rootStore.products.value)
+console.log(products.value)
   return{
     products, 
     SingleProductPage
@@ -238,7 +42,7 @@ setup(){
 }
 .product {
   width: calc(33.33% - 50px); /* Adjust the width as needed, considering margins */
-  margin: 10px;
+  margin: 10px 10px 0 10px;
   box-sizing: border-box;
   border-radius: 2rem;
   border: 1px solid #ddd; /* Optional: Add a border for better separation */
