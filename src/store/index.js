@@ -20,11 +20,21 @@ import { reactive } from "vue";
     console.log(products.value)
     }
  
+    const productss = reactive({value:{}})
+    const FETCH_PRODUCTSS = async ()=>{
+     const res = await fetch('http://10.20.3.178:8081/product/get-all-product');
+     const jsonew = await res.json();
+    products.value = {...jsonew}
+    console.log(products.value)
+    }
+
     return {
      posts,
      FETCH_PRODUCTS,
      products,
-     FETCH_POST
+     productss,
+     FETCH_POST,
+     FETCH_PRODUCTSS
     }
 })
 

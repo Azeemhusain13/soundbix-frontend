@@ -5,7 +5,7 @@
   <div  v-for="product in products"  :key="product.productId" @click="SingleProductPage" >
     <h2>Bestselling affordable {{ product?.categoryName }}</h2>
     <div class="container">
-        <div v-for="catProd in product?.productList" :key="catProd">
+        <div class ="card" v-for="catProd in product?.productList" :key="catProd">
           <img :src="catProd.productImageUrl" :alt="image" class= "image">
           <h3 class="productname">{{ catProd.productName }}</h3>
           <p class="productprice">{{ catProd.productPrice }}</p>
@@ -46,7 +46,7 @@ setup(){
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  /* margin-top: 190px; */
+  
 }
 
 img {
@@ -61,8 +61,8 @@ img {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-
   margin: 25px;
+  border-radius: 2rem; 
 }
 
 
