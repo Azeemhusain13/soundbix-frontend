@@ -17,7 +17,6 @@
             <p>Price: {{ product.productPrice }}</p>
             <label>Quantity: </label>
             <input
-              v-model="product.quantity"
               type="number"
               min="1"
               class="quantity-input"
@@ -64,9 +63,7 @@ export default {
       delete cartItems.value[key];
     };
  
-    const calculateTotalPrice = () => {
       for( let key in cartItems.value) {
-        totalPrice.value += Number(cartItems.value[key].productPrice)
       }
     };
  
@@ -77,9 +74,6 @@ export default {
     // onBeforeMount(async () => {
     //   await userRoot.FETCH_CART(id.value);
     // });
- 
-    watch(() => cartItems.value, () => {
-      calculateTotalPrice()
     }, {
       immediate: true,
       deep: true
