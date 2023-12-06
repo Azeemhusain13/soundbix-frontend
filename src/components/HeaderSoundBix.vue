@@ -3,13 +3,15 @@
     <div class="nav-inner">
       <!-- Logo -->
       <div class="logo">
-
-       SoundBix
-
+        <RouterLink to="/">SoundBix</RouterLink>
       </div>
       <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search...">
-      </div>
+        <input type="text" class="search-box" placeholder="Search..." v-model = "input" >
+        <!-- <button class="search-btn" @click="handleSearch">Search</button>-->
+        </div> 
+        <!-- <button class="search-btn" @click="handleSearch">
+            Search
+          </button> -->
       <!-- Links -->
       <div class="links">
         <router-link to="/">HOME</router-link>
@@ -19,14 +21,14 @@
 
       <div class="icons">
         <div class="sub-header" v-if="isLoggedIn">
-          <div class="name">{{ name }}</div>
-          <button class="logout" @click="handleLogout">Logout</button>
+          <div class="name">HI, {{ name }}!</div>
+          <button class="iconss" @click="handleLogout">LOGOUT</button>
         </div>
         <router-link to="/login" v-else>
           <span class="icon">
-
-             <div class="iconss"> 
-        <router-link to="/login"> LOGIN</router-link></div>
+            <div class="iconss">
+              <router-link to="/login"> LOGIN</router-link>
+            </div>
             <!-- <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 
               <path
@@ -39,27 +41,34 @@
             </svg> -->
           </span>
         </router-link>
-        
+
         <button @click="getUserCart">
           <router-link to="/cart">
             <span class="icons">
-            <!-- <span class="iconss"> -->
-              <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- <span class="iconss"> -->
+              <svg
+                width="18"
+                height="20"
+                viewBox="0 0 18 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M13 9V5C13 3.93913 12.5786 2.92172 11.8284 2.17157C11.0783 1.42143 10.0609 1 9 1C7.93913 1 6.92172 1.42143 6.17157 2.17157C5.42143 2.92172 5 3.93913 5 5V9H13ZM2 7H16L17 19H1L2 7Z"
-                  stroke="#121212" stroke-linecap="round" stroke-linejoin="round" />
-              </svg> 
+                  stroke="#121212"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </span>
             <!-- </span> -->
           </router-link>
         </button>
-     
- 
       </div>
       <!-- Icons -->
       <!-- <div class="iconss"> 
         <router-link to="/login"> LOGIN</router-link></div> -->
-        <!-- <span class="icon">
+      <!-- <span class="icon">
           <svg
             width="16"
             height="20"
@@ -81,8 +90,8 @@
             />
           </svg>
         </span>--->
-     
-        <!-- <button @click="getUserCart">
+
+      <!-- <button @click="getUserCart">
           <router-link to="/cart">
             <span class="icons">
               <svg
@@ -101,47 +110,65 @@
               </svg> </span
           ></router-link>
         </button> -->
-
-      </div>
+    </div>
   </nav>
 </template>
 <script>
-
-import router from '@/router';
+import router from "@/router";
 // import { computed } from 'vue';
-import { ref, watch } from 'vue';
+import { ref, watch } from "vue";
+import { RouterLink } from "vue-router";
+import useFilterStore from "@/store/filter-service";
+// import useRootStore from "@/store";
 export default {
-  name: 'HeaderSoundBix',
+  name: "HeaderSoundBix",
   props: {
-    msg: String
+    msg: String,
   },
   setup() {
+
+    const useFilter = useFilterStore();
+    const input = ref('')
+    // const product = computed(() => useFilter.productSearched.value)
+ const handleSearch = () => {
+   console.log(input)
+   useFilter.FETCH_PRODUCT_SEARCH(input.value);
+   console.log(useFilter.productSearched);
+ }
+
     const getUserCart = () => {
       if (isLoggedIn.value) {
         router.push({
           name: "cart",
-          query: {
-            userId: 1
-          }
-        })
-      }else{
-        router.push('/login')
+          // query: {
+          //     userId:
+          // }
+        });
+      } else {
+        router.push("/login");
       }
-
     }
+
+    // const useRoot = useRootStore()
 
     const handleLogout = () => {
-      sessionStorage.clear()
-    }
-
+      sessionStorage.clear();
+      window.location.reload();
+    };
     const isLoggedIn = ref(sessionStorage.getItem("token"));
     const name = ref(sessionStorage.getItem("name"));
-
-
     watch(() => {
       isLoggedIn.value = sessionStorage.getItem("token");
       name.value = sessionStorage.getItem("name");
     });
+
+    // const input = ref("");
+
+    // const handleSearch = () => {
+    //   console.log(input);
+    //   useRoot.FETCH_PRODUCT_SEARCH(input.value);
+    //   console.log(useRoot.productSearched);
+    // };
     // const isLoggedIn = computed(() =>
     //   sessionStorage.getItem("token")
     // )
@@ -152,25 +179,13 @@ export default {
       getUserCart,
       isLoggedIn,
       name,
-      handleLogout
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      handleLogout, handleSearch,
+      input,
+      products: useFilter.productSearched
+    };
+  },
+  components: { RouterLink },
+};
 
 // import router from '@/router';
 // export default {
@@ -194,31 +209,35 @@ export default {
 // }
 </script>
 <style>
+.name {
+  margin-right: 10px;
+  color: white;
+  text-transform: uppercase;
+  display: inline;
+}
 
 .links {
-  color: #3498db; 
-  text-decoration: none; 
+  color: white;
+  text-decoration: none;
 }
 
 .logo {
-  font-family: sans-serif; 
-  font-weight: bold; 
-  color: white; 
-  text-transform: uppercase; 
+  font-family: sans-serif;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
   letter-spacing: 2px;
   padding: 10px;
   font-size: 30px;
   margin-left: 50px;
 }
 
-.iconss{
-  background-color: 	#ff9900;
+.iconss {
+  background-color: #ff9900;
   padding: 12px;
   border-radius: 10%;
+  color: white;
 }
-
-</script>
-<style>
 nav {
   border-bottom: 2px solid #f8f8f8;
 }
@@ -232,11 +251,10 @@ nav .nav-inner {
   position: fixed;
   margin: auto;
   z-index: 5;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 
-  box-shadow:0px 3px 5px #F3F3F3;
+  box-shadow: 0px 3px 5px #f3f3f3;
   background-color: #282828;
-
 }
 
 .nav-inner .links a {
@@ -255,14 +273,12 @@ nav .nav-inner {
   border-color: #121212;
 }
 
-
-.icons{
-    display: flex;
-    align-items: center;
-    color: black;
-    padding: 8px;
-    margin-right: 10px;
-
+.icons {
+  display: flex;
+  align-items: center;
+  color: black;
+  padding: 8px;
+  margin-right: 10px;
 }
 
 .icons span {
@@ -277,18 +293,16 @@ nav .nav-inner {
 }
 
 .search-box {
+  padding: 10px;
+  width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
 
-      padding: 10px;
-      width: 500px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-    }
-
- a {
+a {
   text-decoration: none;
-  color:white;
-
+  color: white;
 }
 
 /* @media (width < 400px) {
@@ -306,7 +320,6 @@ nav .nav-inner {
   align-items: center;
   justify-content: center;
 } */
-
 
 @media (max-width: 400px) {
   .nav-inner {
@@ -327,11 +340,9 @@ nav .nav-inner {
     width: 100%;
     box-sizing: border-box;
 
-    padding: 10px; 
-    margin-bottom: 5px; 
+    padding: 10px;
+    margin-bottom: 5px;
     margin-top: -88px;
-    
-
   }
 
   .search-container {
@@ -339,7 +350,6 @@ nav .nav-inner {
 
     padding: 10px; /* Adjust as needed */
     display: none;
-
   }
 
   .logo {
@@ -354,10 +364,9 @@ nav .nav-inner {
   }
 
   .icons {
-
-    margin-top: 10px; 
-    display:none;
+    margin-top: 10px;
+    display: none;
     /* Adjust as needed */
-  }}
-
+  }
+}
 </style>

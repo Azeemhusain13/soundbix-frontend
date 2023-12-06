@@ -11,16 +11,17 @@
       </p>
           <p class="rating">Rating: ★★★★☆</p>
           <div class="additional-details">
-          <p class="discount-price">Rs. {{Product.productPrice}} </p>
+          <p class="discount-price">MRP: Rs. {{Product.productPrice}} </p>
           <div class="dropdown">
+            <p v-if="selectedMerchant">Selling price: Rs. {{ newPrice }}</p>
             <label for="merchantSelect">Select Merchant : </label>
             <select id="merchantSelect" v-model="selectedMerchant">
-              <option value="" disabled>Select a merchant</option>
+              <option v-if="listOfMerchants.length" value="" disabled>{{listOfMerchants[0].merchantName}}</option>
               <option v-for="(merchant, index) in listOfMerchants" :key="index" :value="merchant.id">
                 {{ merchant.merchantName }}
               </option>
             </select>
-            <p v-if="selectedMerchant">Selected Merchant: {{ getMerchantName(selectedMerchant) }}</p>
+            <p v-if="selectedMerchant">{{ getMerchantName(selectedMerchant) }}</p>
           </div>
           </div>
         
@@ -31,14 +32,6 @@
             <td>Brand</td>
             <td>{{Product.productBrand}}</td>
           </tr>
-          <tr>
-            <td>Material</td>
-            <td>Synthetic Leather</td>
-          </tr>
-          <tr>
-            <td>Closure</td>
-            <td>Lace-Up</td>
-          </tr>
         </table> 
         </div>
        </div>
@@ -46,12 +39,11 @@
     </template>
     
     <script>
-
-import {computed, ref , defineComponent, onBeforeMount} from "vue";
+  import {computed, ref , defineComponent, onBeforeMount,watch} from "vue";
 import { useRoute } from "vue-router";
 import useRootStore from '@/store/index';
 import router from "@/router";
-
+ 
 export default defineComponent({
 setup() {
   const rootStore = useRootStore();
@@ -59,36 +51,67 @@ setup() {
       console.log(Product.value.productName.value)
       const body = {
         'productId':Product.value.productId,
-        'merchantId':"Sets",
-         'quantity':1
+        'merchantId':newMerchantId.value,
+        'quantity':1
       }
-    rootStore.ADDTOCART(body,1)      
-   
-    router.push('/cart')
+      console.log(body)
+      console.log(sessionStorage.getItem("id"))
+    rootStore.ADDTOCART(body,sessionStorage.getItem("id"))      
+   window.location.reload();
+         window.location.href = '/cart';
+   router.push('/cart')
   };
-
-
+  const findIndexByKeyValue = (array, key, value) => {
+  return array.findIndex((element) => element[key] === value);
+};
+ 
+ 
     const id = ref(0);
     const route = useRoute()
     id.value = route.params.id
     
     const Product = computed(() => rootStore.products1.value)
-
+ 
     const listOfMerchants = computed(() => rootStore.merchants)
     // console.log(Merchants)
+    const selectedMerchant = ref('')
+    // computed(()=>listOfMerchants.value[0].merchantName.value)
+    // selectedMerchant = listOfMerchants.find((merchant) => merchant.id === selectedMerchant.value);
+    const newMerchantId = ref('');
+    const newPrice = ref('')
+      
+    watch(selectedMerchant, (newSelectedMerchant, oldSelectedMerchant) => {
+      console.log('Selected Merchant changed:', newSelectedMerchant,'old:',oldSelectedMerchant);
+ 
+      newMerchantId.value = newSelectedMerchant;
+      const merchant_index = findIndexByKeyValue(listOfMerchants.value, 'id', newMerchantId.value);
+      console.log(merchant_index,Product.value)
+      const product_index = findIndexByKeyValue(listOfMerchants.value[merchant_index].productInventories,'productId',Product.value.productId)
+      newPrice.value = listOfMerchants.value[merchant_index].productInventories[product_index].price;
+      console.log(newMerchantId.value,newPrice.value)
+    });
+ 
+    const getMerchantName = () => {
+    };
+ 
     
     onBeforeMount(()=>{
       rootStore.FETCH_PRODUCTS_BY_ID(id.value)
     rootStore.FETCH_MERCHANTS_BY_ID(id.value)
+    //rootStore.ADDTOCART(id.value)
     })
           return {
             listOfMerchants,
-            Product, 
+            selectedMerchant,
+            newMerchantId,
+            Product,
+            newPrice,
             AddToCart,
+            getMerchantName,
         }
     }
     })
-    </script>
+  </script>
     
     <style scoped>
     .product-page {
@@ -135,7 +158,7 @@ setup() {
     }
     
     .additional-details {
-      text-align: center;
+      text-align: left;
     }
     
     .discount-price {
@@ -150,11 +173,6 @@ setup() {
       text-decoration: line-through;
       margin-left: 5px;
     }
-    .off {
-      font-size: 18px;
-      color: red;
-      margin-bottom: 5px;
-    }
     
     .seller {
       font-size: 12px;
@@ -162,13 +180,14 @@ setup() {
     }
     
     .add-to-cart-btn {
-      background-color: #8800ff;
+      background-color: black;
       color: #ffffff;
       padding: 10px 20px;
       font-size: 16px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+
     }
     
     .add-to-cart-btn:hover {
@@ -214,7 +233,7 @@ setup() {
   cursor: pointer;
 }
 .dropdown{
-    padding: 20px;
+    padding: 20px 0px;
 }
 
     </style>

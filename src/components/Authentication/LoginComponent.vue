@@ -12,8 +12,10 @@
     </form>
     <div class="message" v-if="signUpMessage">{{ signUpMessage }}</div>
     <div class="error-message" v-else>{{ errorMessage }}</div>
-    <RouterLink class="routerLink" to="/signin">Registration</RouterLink>
+
+  <RouterLink class="routerLink" to="/signin">registration</RouterLink>
   </div>
+  
 </template>
 
 <script>
@@ -42,6 +44,8 @@ export default {
       setTimeout(() => {
         if (sessionStorage.getItem('token') != null && errorMessage.value === "") {
           router.push('/')
+          window.location.reload();
+          window.location.href = '/';
         }
         useAuth.loginedUpMsg = ''
         useAuth.errorMsg = ''
@@ -76,11 +80,21 @@ export default {
       handleOnFocus
     };
   },
-  components: { RouterLink }
+  components: {
+    RouterLink }
 };
 </script>
 
 <style scoped>
+
+.button{
+  padding: 10px 12px;
+    border-radius: 12px;
+    background-color: #333333;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 .login {
   max-width: 300px;
   margin: 100px auto;
@@ -144,5 +158,7 @@ input {
   display: flex;
   justify-content: flex-end;
   padding: 10px;
+  color: grey;
+
 }
 </style>
