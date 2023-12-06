@@ -16,6 +16,7 @@
             <label for="merchantSelect">Select Merchant : </label>
             <select id="merchantSelect" v-model="selectedMerchant">
               <option value="" disabled>Select a merchant</option>
+              <option value="" disabled>{{listOfMerchants[0].merchantName}}</option>
               <option v-for="(merchant, index) in listOfMerchants" :key="index" :value="merchant.id">
                 {{ merchant.merchantName }}
               </option>
@@ -48,6 +49,7 @@
     <script>
 
 import {computed, ref , defineComponent, onBeforeMount} from "vue";
+import {computed, ref , defineComponent, onBeforeMount,watch} from "vue";
 import { useRoute } from "vue-router";
 import useRootStore from '@/store/index';
 import router from "@/router";
@@ -60,8 +62,10 @@ setup() {
       const body = {
         'productId':Product.value.productId,
         'merchantId':"Sets",
+        'merchantId':newMerchantId.value,
          'quantity':1
       }
+      console.log(body)
     rootStore.ADDTOCART(body,1)      
    
     router.push('/cart')
@@ -76,15 +80,33 @@ setup() {
 
     const listOfMerchants = computed(() => rootStore.merchants)
     // console.log(Merchants)
+    const selectedMerchant = ref('')
+    // computed(()=>listOfMerchants.value[0].merchantName.value)
+    // selectedMerchant = listOfMerchants.find((merchant) => merchant.id === selectedMerchant.value);
+    const newMerchantId = ref('');
+    watch(selectedMerchant, (newSelectedMerchant, oldSelectedMerchant) => {
+      console.log('Selected Merchant changed:', newSelectedMerchant,oldSelectedMerchant);
+
+      newMerchantId.value = newSelectedMerchant;
+      console.log(newMerchantId.value)
+    });
+
+    const getMerchantName = () => {
+    };
+
     
     onBeforeMount(()=>{
       rootStore.FETCH_PRODUCTS_BY_ID(id.value)
     rootStore.FETCH_MERCHANTS_BY_ID(id.value)
+    ///rootStore.ADDTOCART(id.value)
     })
           return {
             listOfMerchants,
+            selectedMerchant,
+            newMerchantId,
             Product, 
             AddToCart,
+            getMerchantName,
         }
     }
     })
