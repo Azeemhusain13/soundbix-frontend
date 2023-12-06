@@ -19,7 +19,7 @@ import FooterSoundBix from './components/FooterSoundBix.vue';
 export default {
   name: 'App',
   components: {
-    HeaderSoundBix, FooterSoundBix,
+    HeaderSoundBix, FooterSoundBix
 }
 }
 </script>

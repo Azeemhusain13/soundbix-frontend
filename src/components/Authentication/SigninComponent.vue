@@ -16,7 +16,7 @@
         <div class="message" v-if="signUpMessage">{{ signUpMessage }}</div>
         <div class="error-message" v-else>{{ errorMessage }}</div>
 
-        <RouterLink class="routerLink" to="/login">Login</RouterLink>
+        <RouterLink class="routerLink" to="/login">login</RouterLink>
 
 
     </div>
@@ -150,6 +150,7 @@ input {
     display: flex;
     justify-content: flex-end;
     padding: 10px;
+    color: grey;
 }
 </style>
   
