@@ -4,9 +4,8 @@
       <img :src="product.productImageUrl" alt="Product Image" />
       <h3>{{ product.productName }}</h3>
       <p class ="brand">{{ product.productBrand }}</p>
-      <p class ="product-price">${{ product.productPrice }}</p>
+      <p class ="product-price">Rs.{{ product.productPrice }}</p>
     <div class="category">
-     <p>ss</p>
       </div>
     </div>
   </div>

@@ -6,7 +6,7 @@
     <h2 >{{ product?.categoryName }}</h2>
     <div class="container">
         <div class ="card" v-for="catProd in product?.productList" :key="catProd" @click="SingleProductPage( catProd.productId)">
-          <img :src="catProd.productImageUrl" :alt="image" class= "image">
+          <img :src="catProd.productImageUrl" :alt="image" class= "image1">
           <div class="{{product?.categoryName}}"></div>
           <h3 class="productname">{{ catProd.productName }}</h3>
           <p class="productprice">Rs.{{ catProd.productPrice }}</p>
@@ -43,6 +43,7 @@ setup(){
 
   </script>
 
+
   <style>
 
 h2{
@@ -54,7 +55,16 @@ h2{
   padding: 10px;
 }
 
-.image{
+/* .image {
+    width: 200px;
+    max-height: 200px;
+    margin-top: 20px;
+    border-radius: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
+.image1{
     height: 200px;
     width: 200px;
 }
@@ -62,7 +72,6 @@ h2{
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  
 }
 
 img {
@@ -100,4 +109,4 @@ img {
 .card1{
   margin-top: 90px;
 }
-</style>
+</style> 

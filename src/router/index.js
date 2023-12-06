@@ -9,6 +9,9 @@ import SingleProductSoundBix from '../components/SingleProductSoundBix.vue'
 import LoginComponent from '../components/Authentication/LoginComponent.vue'
 import SigninComponent from '../components/Authentication/SigninComponent.vue'
 import SearchComponent from '@/components/SearchComponent.vue'
+import CheckOutSoundBix from '@/components/CheckOutSoundBix.vue'
+import SearchFilter from '@/components/SearchFilter.vue'
+import SearchProducts from '@/components/SearchProducts.vue'
 const routes=[
     {
         path:'/about',
@@ -59,7 +62,22 @@ const routes=[
     path:'/signin',
     name: 'signin',
     component: SigninComponent
-   }
+   },
+   {
+    path: '/search',
+    name:'search',
+    component: SearchFilter
+   },
+   {
+    path:'/Checkout',
+    name:'checkout',
+    component: CheckOutSoundBix
+   },
+   
+  { path: '/search',
+   name:'search',
+   component: SearchProducts
+}
 
 ]
 

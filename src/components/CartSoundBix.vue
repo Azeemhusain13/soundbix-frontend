@@ -8,7 +8,7 @@
           <div class="product-details">
             <h3>{{ product.productName }}</h3>
             <p>{{ product.productDescription }}</p>
-            <p>Price: {{ product.productPrice }}</p>
+            <p>Price: Rs. {{ product.productPrice }}</p>
             <label>Quantity: </label>
             <input v-model="product.quantity" type="number" min="1" class="quantity-input" />
           </div>
@@ -22,9 +22,9 @@
     <div class="cart-summary">
       <h2>Order Summary</h2>
       <p>Total Items: {{ cartItems.length }}</p>
-      <p>Total Price: {{ totalPrice }}</p>
+      <p>Total Price: Rs. {{ totalPrice }}</p>
       <button @click="checkout" class="checkout-button">
-        Proceed to Checkout
+       <RouterLink to="/Checkout"> Proceed to Checkout </RouterLink>
       </button>
     </div>
   </div>
@@ -33,16 +33,17 @@
 import { computed, ref, watch } from "vue";
 
 import useRootStore from "@/store/index";
-import { useRoute, useRouter } from "vue-router";
+import {  useRouter } from "vue-router";
 
 export default {
   setup() {
-    const route = useRoute();
+    // const route = useRoute();
     const router = useRouter();
     const id = ref(0);
 
     const totalPrice = ref(0)
-    id.value = 1;
+    id.value = sessionStorage.getItem("id");
+    
     const userRoot = useRootStore();
     console.log(id.value)
 
@@ -66,13 +67,12 @@ export default {
       }
     };
 
-    const checkout = () => {
-      // Implement your checkout logic here
+     const checkout = () => {
+          console.log(sessionStorage.getItem("id"))
+          userRoot.SEND_EMAIL(sessionStorage.getItem("id"))
+          userRoot.REMOVE_CART(sessionStorage.getItem("id"))
     };
-    // const userRoot = useRootStore();
-    // onBeforeMount(async () => {
-    //   await userRoot.FETCH_CART(id.value);
-    // });
+
 
     watch(() => cartItems.value, () => {
       calculateTotalPrice()
@@ -94,6 +94,17 @@ export default {
 </script>
  
 <style scoped>
+
+
+.remove-button{
+  background-color: 	#ff9900;
+  padding: 12px;
+  border-radius: 10%;
+  color: white;
+  text-transform: uppercase;
+
+
+}
 .cart-container {
   padding: 50px;
   display: flex;
@@ -130,7 +141,7 @@ export default {
 }
 
 .checkout-button {
-  background-color: #4c74af;
+  background-color: black;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -139,6 +150,6 @@ export default {
 }
 
 .checkout-button:hover {
-  background-color: #13dc1d;
+  background-color: grey;
 }
 </style>

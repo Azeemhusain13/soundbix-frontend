@@ -58,6 +58,26 @@ import { reactive, ref } from "vue";
         console.log(cart.value);
     };
 
+    const SEND_EMAIL = async (userId) => {
+        const response = await fetch(`http://10.20.3.151:8060/cart/placeOrder?userId=${userId}`)
+        const data = await response.json()
+        console.log(data)
+    }
+
+        const productSearched = reactive({value:{}});
+        const FETCH_PRODUCT_SEARCH = async (input) => {
+         const res = await fetch(`http://10.20.3.178:8081/product/filter-products/${input}`);
+         const jsonew = await res.json();
+         console.log(jsonew)
+         productSearched.value = {...jsonew}
+        console.log(productSearched.value)
+        };
+
+        const REMOVE_CART = async (userId) => {
+            const response = await fetch(`http://10.20.3.151:8060/cart/emptyCart?userId=${userId}`)
+            const data = await response.json()
+            console.log(data)
+        }
 
        const setProductDetais = ref({})
     const ADDTOCART = async(cartItemsDto,userId) =>{
@@ -69,7 +89,7 @@ import { reactive, ref } from "vue";
                 },
                 body: JSON.stringify(cartItemsDto),
               };
-            const urlWithUserId = `http://localhost:8060/cart/addToCart?userId=${userId}`;
+            const urlWithUserId = `http://10.20.3.151:8060/cart/addToCart?userId=${userId}`;
               const res = await fetch(urlWithUserId,options);
               console.log(res);
               const jsonRes = await res.json();
@@ -90,12 +110,16 @@ import { reactive, ref } from "vue";
      setProductDetais,
      FETCH_CART,
      FETCH_PRODUCTS,
+     REMOVE_CART,
      products,
      products1,
      allproducts,
      FETCH_POST,
      FETCH_ALLPRODUCTS,
       FETCH_LOGIN, login, FETCH_PRODUCTS_BY_ID,
+      FETCH_PRODUCT_SEARCH, productSearched,
+      
+      SEND_EMAIL
     }
 })
 
