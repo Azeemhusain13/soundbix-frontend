@@ -12,18 +12,16 @@
           <p class="rating">Rating: ★★★★☆</p>
           <div class="additional-details">
           <p class="discount-price">Rs. {{Product.productPrice}} </p>
-          <p class="seller">Seller: Flashtech Retail</p>
-          </div>
-
           <div class="dropdown">
-            <label for="Qty : "> Qty : </label>
-            <select>
-              <option value="">1</option>
-              <option value="">2</option>
-              <option value="">3</option>
-              <option value="">4</option>
-              <option value="">5</option>
+            <label for="merchantSelect">Select Merchant : </label>
+            <select id="merchantSelect" v-model="selectedMerchant">
+              <option value="" disabled>Select a merchant</option>
+              <option v-for="(merchant, index) in listOfMerchants" :key="index" :value="merchant.id">
+                {{ merchant.merchantName }}
+              </option>
             </select>
+            <p v-if="selectedMerchant">Selected Merchant: {{ getMerchantName(selectedMerchant) }}</p>
+          </div>
           </div>
         
           <button class="add-to-cart-btn" @click="AddToCart()">Add to Cart</button>
@@ -49,37 +47,44 @@
     
     <script>
 
-import {computed, ref , defineComponent} from "vue";
+import {computed, ref , defineComponent, onBeforeMount} from "vue";
 import { useRoute } from "vue-router";
 import useRootStore from '@/store/index';
 import router from "@/router";
 
 export default defineComponent({
 setup() {
-
-
+  const rootStore = useRootStore();
   const AddToCart = () => {
-    console.log("called")
+      console.log(Product.value.productName.value)
+      const body = {
+        'productId':Product.value.productId,
+        'merchantId':"Sets",
+         'quantity':1
+      }
+    rootStore.ADDTOCART(body,1)      
+   
     router.push('/cart')
   };
 
-    const rootStore = useRootStore();
+
     const id = ref(0);
     const route = useRoute()
     id.value = route.params.id
-     rootStore.FETCH_PRODUCTS_BY_ID(id.value)
-    // const rootStore = useRootStore();
-    // rootStore.FETCH_POST()
+    
     const Product = computed(() => rootStore.products1.value)
 
+    const listOfMerchants = computed(() => rootStore.merchants)
+    // console.log(Merchants)
+    
+    onBeforeMount(()=>{
+      rootStore.FETCH_PRODUCTS_BY_ID(id.value)
+    rootStore.FETCH_MERCHANTS_BY_ID(id.value)
+    })
           return {
-          // productImages: [
-          //   "banner1.jpg",
-          //   "banner2.jpg",
-          //   "banner3.jpg",
-          //   "banner4.jpg"
-          // ], 
-          Product, AddToCart
+            listOfMerchants,
+            Product, 
+            AddToCart,
         }
     }
     })

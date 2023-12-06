@@ -31,6 +31,7 @@
 </template>
 <script>
 import { computed, ref, watch } from "vue";
+
 import useRootStore from "@/store/index";
 import { useRoute, useRouter } from "vue-router";
 
@@ -41,7 +42,7 @@ export default {
     const id = ref(0);
 
     const totalPrice = ref(0)
-    id.value = route.query.userId;
+    id.value = 1;
     const userRoot = useRootStore();
     console.log(id.value)
 
