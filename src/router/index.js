@@ -6,7 +6,8 @@ import ContactSoundBix from '../components/ContactSoundBix'
 import BannerSoundBix from '../components/BannerSoundBix'
 import CartSoundBix from '../components/CartSoundBix'
 import SingleProductSoundBix from '../components/SingleProductSoundBix.vue'
-import LoginComponent from '../components/LoginComponent.vue'
+import LoginComponent from '../components/Authentication/LoginComponent.vue'
+import SigninComponent from '../components/Authentication/SigninComponent.vue'
 import SearchComponent from '@/components/SearchComponent.vue'
 const routes=[
     {
@@ -53,6 +54,11 @@ const routes=[
     path:'/searchpageproduct',
     name: 'searchpageproduct',
     component: SearchComponent
+   },
+   {
+    path:'/signin',
+    name: 'signin',
+    component: SigninComponent
    }
 
 ]
