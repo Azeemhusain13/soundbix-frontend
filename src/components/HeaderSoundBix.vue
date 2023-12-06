@@ -1,12 +1,14 @@
 <template>
-    <nav>
+  <nav>
     <div class="nav-inner">
       <!-- Logo -->
       <div class="logo">
+
        SoundBix
+
       </div>
       <div class="search-container">
-            <input type="text" class="search-box" placeholder="Search...">
+        <input type="text" class="search-box" placeholder="Search...">
       </div>
       <!-- Links -->
       <div class="links">
@@ -22,15 +24,18 @@
         </div>
         <router-link to="/login" v-else>
           <span class="icon">
+
              <div class="iconss"> 
         <router-link to="/login"> LOGIN</router-link></div>
             <!-- <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+
               <path
                 d="M12 5C12 6.06087 11.5786 7.07828 10.8284 7.82843C10.0783 8.57857 9.06087 9 8 9C6.93913 9 5.92172 8.57857 5.17157 7.82843C4.42143 7.07828 4 6.06087 4 5C4 3.93913 4.42143 2.92172 5.17157 2.17157C5.92172 1.42143 6.93913 1 8 1C9.06087 1 10.0783 1.42143 10.8284 2.17157C11.5786 2.92172 12 3.93913 12 5V5Z"
                 stroke="#121212" stroke-linecap="round" stroke-linejoin="round" />
               <path
                 d="M8 12C6.14348 12 4.36301 12.7375 3.05025 14.0503C1.7375 15.363 1 17.1435 1 19H15C15 17.1435 14.2625 15.363 12.9497 14.0503C11.637 12.7375 9.85652 12 8 12V12Z"
                 stroke="#121212" stroke-linecap="round" stroke-linejoin="round" />
+
             </svg> -->
           </span>
         </router-link>
@@ -96,9 +101,9 @@
               </svg> </span
           ></router-link>
         </button> -->
+
       </div>
   </nav>
-
 </template>
 <script>
 
@@ -122,16 +127,17 @@ export default {
       }else{
         router.push('/login')
       }
- 
+
     }
- 
+
     const handleLogout = () => {
       sessionStorage.clear()
     }
- 
+
     const isLoggedIn = ref(sessionStorage.getItem("token"));
     const name = ref(sessionStorage.getItem("name"));
- 
+
+
     watch(() => {
       isLoggedIn.value = sessionStorage.getItem("token");
       name.value = sessionStorage.getItem("name");
@@ -150,6 +156,7 @@ export default {
     }
   }
 }
+
 
 
 
@@ -210,9 +217,12 @@ export default {
   border-radius: 10%;
 }
 
+</script>
+<style>
 nav {
   border-bottom: 2px solid #f8f8f8;
 }
+
 nav .nav-inner {
   height: 60px;
   display: flex;
@@ -223,9 +233,12 @@ nav .nav-inner {
   margin: auto;
   z-index: 5;
   background-color: #FFFFFF;
+
   box-shadow:0px 3px 5px #F3F3F3;
   background-color: #282828;
+
 }
+
 .nav-inner .links a {
   margin: 0px 16px;
   font-style: normal;
@@ -237,9 +250,11 @@ nav .nav-inner {
   transition: 0.3s;
   text-decoration: none;
 }
+
 .nav-inner .links a:hover {
   border-color: #121212;
 }
+
 
 .icons{
     display: flex;
@@ -247,7 +262,9 @@ nav .nav-inner {
     color: black;
     padding: 8px;
     margin-right: 10px;
+
 }
+
 .icons span {
   margin: 0 13px;
   display: flex;
@@ -256,10 +273,11 @@ nav .nav-inner {
 }
 
 .search-container {
-      position: relative;
-    }
+  position: relative;
+}
 
 .search-box {
+
       padding: 10px;
       width: 500px;
       border: 1px solid #ccc;
@@ -270,7 +288,9 @@ nav .nav-inner {
  a {
   text-decoration: none;
   color:white;
+
 }
+
 /* @media (width < 400px) {
   .links{
     display: block;
@@ -306,15 +326,20 @@ nav .nav-inner {
   .links a {
     width: 100%;
     box-sizing: border-box;
+
     padding: 10px; 
     margin-bottom: 5px; 
     margin-top: -88px;
     
+
   }
+
   .search-container {
     margin-top: 10px;
+
     padding: 10px; /* Adjust as needed */
     display: none;
+
   }
 
   .logo {
@@ -329,8 +354,10 @@ nav .nav-inner {
   }
 
   .icons {
+
     margin-top: 10px; 
     display:none;
     /* Adjust as needed */
   }}
+
 </style>

@@ -1,13 +1,10 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
  
  const useRootStore = defineStore('root', () => {
- 
-    const posts = reactive({ value: {} })
-
-    const FETCH_POST = async () => {
+      const posts = reactive({ value: {} })
+       const FETCH_POST = async () => {
         const res = await fetch('http://10.20.3.178:8081/product/get-all-categories-with-products')
- 
         const jsonnew = await res.json();
         posts.value = { ...jsonnew }
         console.log(posts.value)
@@ -27,6 +24,13 @@ import { reactive } from "vue";
     products1.value = {...jsonew1}
     console.log(products1.value)
     }
+
+    const merchants =  ref([])
+        const FETCH_MERCHANTS_BY_ID = async (productId)=>{
+            const res1 = await fetch(`http://10.20.3.173:8097/productInventory/get-merchants-by-product-id/${productId}`);
+          const jsonew1 = await res1.json();
+           merchants.value = jsonew1
+        }
  
     
 
@@ -54,10 +58,36 @@ import { reactive } from "vue";
         console.log(cart.value);
     };
 
-    
+
+       const setProductDetais = ref({})
+    const ADDTOCART = async(cartItemsDto,userId) =>{
+        try {
+            const options = {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(cartItemsDto),
+              };
+            const urlWithUserId = `http://localhost:8060/cart/addToCart?userId=${userId}`;
+              const res = await fetch(urlWithUserId,options);
+              console.log(res);
+              const jsonRes = await res.json();
+              console.log(jsonRes)
+              setProductDetais.value = {jsonRes}
+        }
+        catch(error){
+            console.error("Error During resgistration");
+        }
+    } 
+
     return {
      posts,
      cart,
+     merchants,
+     FETCH_MERCHANTS_BY_ID,
+     ADDTOCART,
+     setProductDetais,
      FETCH_CART,
      FETCH_PRODUCTS,
      products,
