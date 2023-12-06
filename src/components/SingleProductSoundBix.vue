@@ -15,7 +15,6 @@
           <div class="dropdown">
             <label for="merchantSelect">Select Merchant : </label>
             <select id="merchantSelect" v-model="selectedMerchant">
-              <option value="" disabled>Select a merchant</option>
               <option value="" disabled>{{listOfMerchants[0].merchantName}}</option>
               <option v-for="(merchant, index) in listOfMerchants" :key="index" :value="merchant.id">
                 {{ merchant.merchantName }}
@@ -48,7 +47,7 @@
     
     <script>
 
-import {computed, ref , defineComponent, onBeforeMount} from "vue";
+
 import {computed, ref , defineComponent, onBeforeMount,watch} from "vue";
 import { useRoute } from "vue-router";
 import useRootStore from '@/store/index';
@@ -61,9 +60,8 @@ setup() {
       console.log(Product.value.productName.value)
       const body = {
         'productId':Product.value.productId,
-        'merchantId':"Sets",
         'merchantId':newMerchantId.value,
-         'quantity':1
+        'quantity':1
       }
       console.log(body)
     rootStore.ADDTOCART(body,1)      
@@ -98,7 +96,7 @@ setup() {
     onBeforeMount(()=>{
       rootStore.FETCH_PRODUCTS_BY_ID(id.value)
     rootStore.FETCH_MERCHANTS_BY_ID(id.value)
-    ///rootStore.ADDTOCART(id.value)
+    //rootStore.ADDTOCART(id.value)
     })
           return {
             listOfMerchants,

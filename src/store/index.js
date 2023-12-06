@@ -69,7 +69,6 @@ import { reactive, ref } from "vue";
                 },
                 body: JSON.stringify(cartItemsDto),
               };
-            const urlWithUserId = `http://localhost:8060/cart/addToCart?userId=${userId}`;
             const urlWithUserId = `http://10.20.3.151:8060/cart/addToCart?userId=${userId}`;
               const res = await fetch(urlWithUserId,options);
               console.log(res);

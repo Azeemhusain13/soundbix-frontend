@@ -3,8 +3,7 @@
     <div class="cart-products">
       <h2>Your Cart</h2>
       <ul>
-        <li
-          v-for="(product, index) in cartItems" :key="index"
+        <li v-for="(product, index) in cartItems" :key="index"
           class="cart-item"
         >
           <img :src="product.productImageUrl"
@@ -17,6 +16,7 @@
             <p>Price: {{ product.productPrice }}</p>
             <label>Quantity: </label>
             <input
+              v-model="product.quantity"
               type="number"
               min="1"
               class="quantity-input"
@@ -63,7 +63,9 @@ export default {
       delete cartItems.value[key];
     };
  
+    const calculateTotalPrice = () => {
       for( let key in cartItems.value) {
+        totalPrice.value += Number(cartItems.value[key].productPrice)
       }
     };
  
@@ -74,6 +76,9 @@ export default {
     // onBeforeMount(async () => {
     //   await userRoot.FETCH_CART(id.value);
     // });
+ 
+    watch(() => cartItems.value, () => {
+      calculateTotalPrice()
     }, {
       immediate: true,
       deep: true
@@ -138,6 +143,3 @@ export default {
   background-color: #13dc1d;
 }
 </style>
- 
-has context menu
-Compose
