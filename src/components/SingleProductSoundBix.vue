@@ -54,13 +54,20 @@ import router from "@/router";
 
 export default defineComponent({
 setup() {
+  const rootStore = useRootStore();
   const AddToCart = () => {
-
-    console.log("called")
+      console.log(Product.value.productName.value)
+      const body = {
+        'productId':Product.value.productId,
+        'merchantId':"Sets",
+         'quantity':1
+      }
+    rootStore.ADDTOCART(body,1)      
+   
     router.push('/cart')
   };
 
-    const rootStore = useRootStore();
+
     const id = ref(0);
     const route = useRoute()
     id.value = route.params.id

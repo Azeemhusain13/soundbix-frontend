@@ -45,16 +45,16 @@
 </template>
 <script>
 import { computed, ref, watch } from "vue";
-import useRootStore from "@/store/index";
-import { useRoute } from "vue-router";
+import useRootStore from "@/store/index.js";
+//import { useRoute } from "vue-router";
  
 export default {
   setup() {
-    const route = useRoute();
+   // const route = useRoute();
     const id = ref(0);
  
     const totalPrice = ref(0)
-    id.value = route.query.userId;
+    id.value = 1;
     const userRoot = useRootStore();
     console.log(id.value)
     userRoot.FETCH_CART(id.value);
