@@ -3,20 +3,23 @@
         <h2>Registration</h2>
         <form @submit.prevent @focus="handleOnFocus">
             <label for="username">Username:</label>
-            <input type="text" id="username" v-model="username"  required>
+            <input type="text" id="username" v-model="username"
+            autocomplete="username"
+            @focus="handleOnFocus">
 
             <label for="useremail">Useremail:</label>
-            <input type="text" id="useremail" v-model="useremail"  required>
+            <input type="text" id="useremail" v-model="useremail" @focus="handleOnFocus">
 
             <label for="password">Password:</label>
-            <input type="password" id="password" v-model="userpassword" >
+            <input type="password" id="password" v-model="userpassword" @focus="handleOnFocus" 
+            autocomplete="current-password">
 
             <button class="button" type="button" @click="onButtonClick">Registration</button>
         </form>
         <div class="message" v-if="signUpMessage">{{ signUpMessage }}</div>
         <div class="error-message" v-else>{{ errorMessage }}</div>
 
-        <RouterLink class="routerLink" to="/login">login</RouterLink>
+        <RouterLink class="routerLink" to="/login" @focus="handleOnFocus">login</RouterLink>
 
 
     </div>
@@ -24,8 +27,8 @@
   
 <script>
 import { ref, computed } from 'vue';
-// import { useRouter } from 'vue-router';
 import useAuthStore from '@/store/auth-service.js'
+
 
 export default {
     setup() {
@@ -33,7 +36,7 @@ export default {
         const useremail = ref('');
         const userpassword = ref('');
         const useAuth = useAuthStore()
-        // const router = useRouter();
+        const registered = computed(() => useAuth.isRegister);
 
         const signUpMessage = computed(() => useAuth.signUpMsg)
         const errorMessage = computed(() => useAuth.errorMsg)
@@ -41,6 +44,7 @@ export default {
         console.log(signUpMessage.value, errorMessage.value)
 
         const handleSubmit = () => {
+            console.log(typeof userpassword.value, userpassword.value)
             const userCredentials = {
                 userName: username.value,
                 userEmail: useremail.value,
@@ -48,23 +52,28 @@ export default {
             };
             useAuth.setSignUpCredentials = userCredentials
             useAuth.REGISTER_USER()
+            // console.log(registered.value)
+            // if (signUpMessage.value !== "") {
+            //     useAuth.signUpMsg = ''
+            //     useAuth.errorMsg = ''
+
+            //     setTimeout(() => {
+            //         router.push('/login')
+            //     }, 2000)
+                
+            // }
+
+
         }
 
-        setTimeout(() => {
-            useAuth.signUpMsg = ''
-            useAuth.errorMsg = ''
-            username.value = ''
-            useremail.value = ''
-            userpassword.value = ''
-        }, 2000)
+        // const clearItem = () => {
+        //     useAuth.signUpMsg = ''
+        //     useAuth.errorMsg = ''
+        // }
 
         const handleOnFocus = () => {
-            username.value = ''
-            useremail.value = ''
-            userpassword.value = ''
             useAuth.signUpMsg = ''
             useAuth.errorMsg = ''
-
         }
 
         const onButtonClick = () => {
@@ -80,7 +89,8 @@ export default {
             signUpMessage,
             useAuth,
             errorMessage,
-            handleOnFocus
+            handleOnFocus,
+            registered
         };
     },
 };
