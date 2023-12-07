@@ -3,14 +3,19 @@
     <h2>Login</h2>
     <form @submit.prevent @focus="handleOnFocus">
       <label for="username">Username:</label>
-      <input type="text" id="username" v-model="username">
+      <input type="text" id="username"
+      autocomplete="username"
+       v-model="username"
+       @focus="handleOnFocus">
 
       <label for="password">Password:</label>
-      <input type="password" id="password" v-model="userpassword">
+      <input type="password" id="password" v-model="userpassword"
+       autocomplete="current-password"
+       @focus="handleOnFocus">
 
       <button class="button" type="submit" @click="onButtonClick">Login</button>
     </form>
-    <div class="message" v-if="signUpMessage">{{ signUpMessage }}</div>
+    <div class="message" v-if="loggedInMessage">{{ loggedInMessage }}</div>
     <div class="error-message" v-else>{{ errorMessage }}</div>
 
   <RouterLink class="routerLink" to="/signin">registration</RouterLink>
@@ -22,7 +27,7 @@
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import useAuthStore from '@/store/auth-service.js'
-import router from '@/router';
+// import router from '@/router';
 
 export default {
   setup() {
@@ -31,8 +36,14 @@ export default {
     const userpassword = ref('');
     const useAuth = useAuthStore()
 
+    const isRegister = computed(()=>useAuth.isRegister);
     const loggedInMessage = computed(() => useAuth.loginedUpMsg)
     const errorMessage = computed(() => useAuth.errorMsg)
+    // const token = computed(()=> {
+    //  return sessionStorage.getItem('token')
+    // })
+
+    // const tokenFlag = computed(()=>useAuth.token)
 
     const handleSubmit = () => {
       const userCredentials = {
@@ -41,25 +52,16 @@ export default {
       };
       useAuth.setLogInCredentials = userCredentials
       useAuth.LOGIN_USER()
-      setTimeout(() => {
-        if (sessionStorage.getItem('token') != null && errorMessage.value === "") {
-          router.push('/')
-          window.location.reload();
-          window.location.href = '/';
-        }
-        useAuth.loginedUpMsg = ''
-        useAuth.errorMsg = ''
-        username.value = ''
-        useremail.value = ''
-        userpassword.value = ''
-      }, 1000)
-
+      // console.log(token.value)
+      // if (token.value) {
+      //     router.push('/')
+      //     window.location.reload();
+      //     window.location.href = '/';
+      //   }
     }
 
     const handleOnFocus = () => {
-      username.value = ''
-      userpassword.value = ''
-
+  
       useAuth.loginedUpMsg = ''
       useAuth.errorMsg = ''
 
@@ -77,7 +79,8 @@ export default {
       onButtonClick,
       loggedInMessage,
       errorMessage,
-      handleOnFocus
+      handleOnFocus,
+      isRegister
     };
   },
   components: {

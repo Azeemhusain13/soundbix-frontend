@@ -6,7 +6,7 @@ const useFilterStore = defineStore('filter', () => {
     
     const productSearched = reactive({value:[]})
     const FETCH_PRODUCT_SEARCH = async (input) => {
-     const res = await fetch(`http://10.20.3.178:8081/product/filter-products/${input}`);
+     const res = await fetch(`/api/product/filter-products/${input}`);
      const jsonew = await res.json();
      console.log(jsonew)
      productSearched.value = [...jsonew]
