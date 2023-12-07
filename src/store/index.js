@@ -83,7 +83,7 @@ import { reactive, ref } from "vue";
         const REMOVEFROMCART = async(removeItem,userId) =>{
             try {
                 const options = {
-                    method: "POST",
+                    method: "DELETE",
                     headers: {
                       "Content-Type": "application/json",
                     },

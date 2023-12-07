@@ -11,7 +11,7 @@
             <p>{{ product.productDescription }}</p>
             <p>Price: Rs. {{ product.productPrice }}</p>
             <label>Quantity: </label>
-            <input v-model="product.quantity" type="number" min="1" class="quantity-input" />
+            <input v-model="product.quantity" type="number" min="1" max = "10" class="quantity-input" @keypress="disableInput"/>
           </div>
           <button @click="removeFromCart(index)" class="remove-button">
             Remove
@@ -21,7 +21,7 @@
     </div>
     <div v-else >
       <h1>YOUR CART IS EMPTY!!!</h1>
-     <img src="@/assets/images/emptyCart.png" />
+     <img src="@/assets/images/emptyCart.png" class="img-cart">
     </div>
     <div v-if="Object.keys(cartItems).length" class="cart-summary">
       <h2>Order Summary</h2>
@@ -55,15 +55,17 @@ export default {
     const cartItems = computed(() => userRoot.cart.value)
    
     const removeFromCart = (key) => {
-      delete cartItems.value[key];
+      
+      console.log('key',key)
       // console.log(cartItems.value[key])
-      console.log('delete',cartItems)
+      console.log('delete',cartItems.value)
+      console.log(cartItems.value[key].productId,cartItems.value[key].merchantId)
       const body = {
         'productId':cartItems.value[key].productId,
         'merchantId':cartItems.value[key].merchantId,
       }
-     useRootStore.REMOVEFROMCART(body,sessionStorage.getItem("id")) 
-
+     userRoot.REMOVEFROMCART(body,sessionStorage.getItem("id")) 
+     delete cartItems.value[key];
     };
 
 
@@ -73,6 +75,9 @@ export default {
         totalPrice.value += Number(cartItems.value[key].productPrice)
       }
     };
+    const disableInput = (event) => {
+      event.preventDefault()
+    }
      const checkout = () => {
           console.log(sessionStorage.getItem("id"))
           userRoot.SEND_EMAIL(sessionStorage.getItem("id"))
@@ -94,16 +99,21 @@ export default {
       // calculateTotalPrice,
       checkout,
       totalPrice,
+      disableInput
     };
   },
 };
 </script>
  
 <style scoped>
+.img-cart{
+  height: 80%
+}
 
 
 .remove-button{
-  background-color: 	#ff9900;
+  height: 40px;
+  background-color: 	#342f29;
   padding: 12px;
   border-radius: 10%;
   color: white;
@@ -147,7 +157,7 @@ export default {
 }
 
 .checkout-button {
-  background-color: black;
+  background-color: rgb(230, 10, 10);
   color: white;
   padding: 10px 15px;
   border: none;

@@ -6,8 +6,8 @@
         <RouterLink to="/">SoundBix</RouterLink>
       </div>
      <div class="search-container">
-      <RouterLink to='/search'> <input type="text" class="search-box" placeholder="Search..." v-model = "input" >
-          <button class="search-btn" @click="handleSearch">SEARCH</button>
+       <input type="text" class="search-box" placeholder="Search..." v-model = "input" >
+       <RouterLink to='/search'> <button class="search-btn" @click="handleSearch">SEARCH</button>
         <!-- <button class="search-btn" @click="handleSearch">Search</button>-->
       </RouterLink>  </div> 
         <!-- <button class="search-btn" @click="handleSearch">
@@ -17,7 +17,7 @@
       <div class="links">
         <router-link to="/">HOME</router-link>
         <router-link to="/categories">CATEGORIES</router-link>
-        <router-link to="/searchpageproduct">PRODUCT</router-link>
+        <router-link to="/searchpageproduct">PRODUCTS</router-link>
       </div>
 
       <div class="icons">

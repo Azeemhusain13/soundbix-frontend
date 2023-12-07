@@ -231,7 +231,7 @@ setup() {
     }
      
     .add-to-cart-btn:hover {
-      background-color: cornflowerblue;
+      background-color: grey;
     }
     .specifications-table {
       width: 100%;

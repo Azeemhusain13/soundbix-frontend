@@ -67,6 +67,7 @@ h2{
 .image1{
     height: 200px;
     width: 200px;
+    
 }
 .container {
   display: flex;
