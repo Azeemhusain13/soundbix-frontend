@@ -5,10 +5,11 @@
       <div class="logo">
         <RouterLink to="/">SoundBix</RouterLink>
       </div>
-      <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search..." v-model = "input" >
+     <div class="search-container">
+      <RouterLink to='/search'> <input type="text" class="search-box" placeholder="Search..." v-model = "input" >
+          <button class="search-btn" @click="handleSearch">SEARCH</button>
         <!-- <button class="search-btn" @click="handleSearch">Search</button>-->
-        </div> 
+      </RouterLink>  </div> 
         <!-- <button class="search-btn" @click="handleSearch">
             Search
           </button> -->
@@ -209,6 +210,14 @@ export default {
 // }
 </script>
 <style>
+.search-btn{
+  margin-left: 5px;
+  align-items: center;
+  color: black;
+  padding: 9px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
 .name {
   margin-right: 10px;
   color: white;
@@ -294,7 +303,7 @@ nav .nav-inner {
 
 .search-box {
   padding: 10px;
-  width: 500px;
+  width: 300px;
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
@@ -327,6 +336,17 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .icons {
+    flex-direction: column; /* Stack items vertically for small screens */
+  }
+
+  .sub-header,
+  .icon {
+    width: 100%; /* Take up full width */
+    text-align: center; /* Center the text */
+    margin-bottom: 10px;
   }
 
   .links {

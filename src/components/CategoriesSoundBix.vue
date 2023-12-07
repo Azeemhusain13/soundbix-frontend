@@ -88,6 +88,7 @@ img {
   transition: 0.3s;
   margin: 25px;
   border-radius: 2rem; 
+  cursor:pointer;
 }
 
 

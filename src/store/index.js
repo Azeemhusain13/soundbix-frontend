@@ -4,14 +4,14 @@ import { reactive, ref } from "vue";
  const useRootStore = defineStore('root', () => {
       const posts = reactive({ value: {} })
        const FETCH_POST = async () => {
-        const res = await fetch('http://10.20.3.178:8081/product/get-all-categories-with-products')
+        const res = await fetch('http://10.20.3.151:8081/product/get-all-categories-with-products')
         const jsonnew = await res.json();
         posts.value = { ...jsonnew }
         console.log(posts.value)
     }
     const products = reactive({value:{}})
     const FETCH_PRODUCTS = async ()=>{
-     const res = await fetch('http://10.20.3.178:8081/product/get-all-categories-with-products');
+     const res = await fetch('http://10.20.3.151:8081/product/get-all-categories-with-products');
      const jsonew = await res.json();
     products.value = {...jsonew}
     console.log(products.value)
@@ -19,7 +19,7 @@ import { reactive, ref } from "vue";
     const products1 = reactive({value:{}})
 
     const FETCH_PRODUCTS_BY_ID = async (productId)=>{
-     const res1 = await fetch(`http://10.20.3.178:8081/product/get-product-by-id/${productId}`);
+     const res1 = await fetch(`http://10.20.3.151:8081/product/get-product-by-id/${productId}`);
      const jsonew1 = await res1.json();
     products1.value = {...jsonew1}
     console.log(products1.value)
@@ -36,14 +36,14 @@ import { reactive, ref } from "vue";
 
     const login = reactive ({value: {}})
     const FETCH_LOGIN = async ()=>{
-        const res = await fetch('http://10.20.3.178:8081/auth/login');
+        const res = await fetch('http://10.20.3.151:8081/auth/login');
         const jsonew = await res.json();
         login.value ={...jsonew}
         console.log(login.value)
     }
     const allproducts = reactive({value:{}})
     const FETCH_ALLPRODUCTS = async ()=>{
-    const res3 = await fetch('http://10.20.3.178:8081/product/get-all-product');
+    const res3 = await fetch('http://10.20.3.151:8081/product/get-all-product');
     const jsonew = await res3.json();
     products.value = {...jsonew}
     console.log(products.value)
@@ -66,7 +66,7 @@ import { reactive, ref } from "vue";
 
         const productSearched = reactive({value:{}});
         const FETCH_PRODUCT_SEARCH = async (input) => {
-         const res = await fetch(`http://10.20.3.178:8081/product/filter-products/${input}`);
+         const res = await fetch(`http://10.20.3.178:8082/product/filter-products/${input}`);
          const jsonew = await res.json();
          console.log(jsonew)
          productSearched.value = {...jsonew}
@@ -78,7 +78,34 @@ import { reactive, ref } from "vue";
             const data = await response.json()
             console.log(data)
         }
+        
+        const responseBackend = ref({})
+        const REMOVEFROMCART = async(removeItem,userId) =>{
+            try {
+                const options = {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(removeItem),
+                  };
+    const urlWithUserId = `http://10.20.3.151:8060/cart/removeProduct?userId=${userId}`;
+                  const res = await fetch(urlWithUserId,options);
+                  console.log(res);
+                  const jsonRes = await res.json();
+                  console.log(jsonRes)
+                  responseBackend.value = {jsonRes}
+            }
+            catch(error){
+                console.error("Error During resgistration");
+            }
+        }
 
+
+
+
+
+//azeem 155
        const setProductDetais = ref({})
     const ADDTOCART = async(cartItemsDto,userId) =>{
         try {
@@ -116,10 +143,14 @@ import { reactive, ref } from "vue";
      allproducts,
      FETCH_POST,
      FETCH_ALLPRODUCTS,
-      FETCH_LOGIN, login, FETCH_PRODUCTS_BY_ID,
-      FETCH_PRODUCT_SEARCH, productSearched,
-      
-      SEND_EMAIL
+    FETCH_LOGIN, 
+    login, 
+    FETCH_PRODUCTS_BY_ID,
+    FETCH_PRODUCT_SEARCH,
+    productSearched,
+    SEND_EMAIL,
+    REMOVEFROMCART,
+    responseBackend
     }
 })
 

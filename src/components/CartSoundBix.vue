@@ -1,8 +1,9 @@
 <template>
   <div class="cart-container">
-    <div class="cart-products">
+    
+     <div v-if = "Object.keys(cartItems).length" class="cart-products">
       <h2>Your Cart</h2>
-      <ul>
+        <ul>
         <li v-for="(product, index) in cartItems" :key="index" class="cart-item">
           <img :src="product.productImageUrl" alt="Product Image" class="product-image" />
           <div class="product-details">
@@ -18,11 +19,14 @@
         </li>
       </ul>
     </div>
-
-    <div class="cart-summary">
+    <div v-else >
+      <h1>YOUR CART IS EMPTY!!!</h1>
+     <img src="@/assets/images/emptyCart.png" />
+    </div>
+    <div v-if="Object.keys(cartItems).length" class="cart-summary">
       <h2>Order Summary</h2>
-      <p>Total Items: {{ cartItems.length }}</p>
-      <p>Total Price: Rs. {{ totalPrice }}</p>
+      <p>Total Items: {{ Object.keys(cartItems).length ?  Object.keys(cartItems).length  : 0 }} </p>
+      <p>Total Price: Rs. {{ Object.keys(cartItems).length ?  totalPrice  : 0 }}</p>
       <button @click="checkout" class="checkout-button">
        <RouterLink to="/Checkout"> Proceed to Checkout </RouterLink>
       </button>
@@ -31,49 +35,50 @@
 </template>
 <script>
 import { computed, ref, watch } from "vue";
-
 import useRootStore from "@/store/index";
 import {  useRouter } from "vue-router";
-
 export default {
   setup() {
     // const route = useRoute();
     const router = useRouter();
     const id = ref(0);
-
-    const totalPrice = ref(0)
+   const totalPrice = ref(0)
     id.value = sessionStorage.getItem("id");
-    
-    const userRoot = useRootStore();
+     const userRoot = useRootStore();
     console.log(id.value)
-
-
-    
-    if (!sessionStorage.getItem("token")) {
-      router.push("/");
+  if (!sessionStorage.getItem("token")) {
+      router.push("/login");
     } else {
       userRoot.FETCH_CART(id.value);
     }
 
     const cartItems = computed(() => userRoot.cart.value)
-
+   
     const removeFromCart = (key) => {
       delete cartItems.value[key];
+      // console.log(cartItems.value[key])
+      console.log('delete',cartItems)
+      const body = {
+        'productId':cartItems.value[key].productId,
+        'merchantId':cartItems.value[key].merchantId,
+      }
+     useRootStore.REMOVEFROMCART(body,sessionStorage.getItem("id")) 
+
     };
+
+
 
     const calculateTotalPrice = () => {
       for (let key in cartItems.value) {
         totalPrice.value += Number(cartItems.value[key].productPrice)
       }
     };
-
      const checkout = () => {
           console.log(sessionStorage.getItem("id"))
           userRoot.SEND_EMAIL(sessionStorage.getItem("id"))
           userRoot.REMOVE_CART(sessionStorage.getItem("id"))
     };
-
-
+ 
     watch(() => cartItems.value, () => {
       calculateTotalPrice()
     }, {
@@ -81,7 +86,8 @@ export default {
       deep: true
     })
 
-
+   console.log(Object.keys(cartItems).length);
+   console.log(cartItems);
     return {
       cartItems,
       removeFromCart,
