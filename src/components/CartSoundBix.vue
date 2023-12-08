@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-container">
+  <div v-if="isCartLoaded" class="cart-container">
     
      <div v-if = "Object.keys(cartItems).length" class="cart-products">
       <h2>Your Cart</h2>
@@ -32,6 +32,8 @@
       </button>
     </div>
   </div>
+  <div v-else class="overlay">
+  </div>
 </template>
 <script>
 import { computed, ref, watch } from "vue";
@@ -53,6 +55,7 @@ export default {
     }
 
     const cartItems = computed(() => userRoot.cart.value)
+    const isCartLoaded = computed(() => userRoot.isCartLoaded)
    
     const removeFromCart = (key) => {
       
@@ -80,7 +83,7 @@ export default {
     }
      const checkout = () => {
           console.log(sessionStorage.getItem("id"))
-          userRoot.SEND_EMAIL(sessionStorage.getItem("id"))
+        //  userRoot.SEND_EMAIL(sessionStorage.getItem("id"))
           userRoot.REMOVE_CART(sessionStorage.getItem("id"))
     };
  
@@ -99,7 +102,8 @@ export default {
       // calculateTotalPrice,
       checkout,
       totalPrice,
-      disableInput
+      disableInput,
+      isCartLoaded
     };
   },
 };
@@ -157,7 +161,7 @@ export default {
 }
 
 .checkout-button {
-  background-color: rgb(230, 10, 10);
+  background-color: orange;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -167,5 +171,15 @@ export default {
 
 .checkout-button:hover {
   background-color: grey;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #FFFFFF;
 }
 </style>

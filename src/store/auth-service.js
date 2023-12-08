@@ -78,7 +78,7 @@ const useAuthStore = defineStore('auth', () => {
                 router.push('/')
                 window.location.reload()
                 window.location.href = '/'
-            },2000)
+            },1000)
             
         }
     }

@@ -50,12 +50,15 @@ import { reactive, ref } from "vue";
     }
 
     const cart = reactive({ value: {} });
+    const isCartLoaded = ref(false)
     const FETCH_CART = async (userId) => {
+        isCartLoaded.value = false
         console.log(userId)
         const res2 = await fetch(`http://10.20.3.151:8060/cart/cartOfUser?userId=${userId}`);
         const jsonew2 = await res2.json();
         cart.value = { ...jsonew2 };
         console.log(cart.value);
+        isCartLoaded.value = true
     };
 
     const SEND_EMAIL = async (userId) => {
@@ -74,9 +77,7 @@ import { reactive, ref } from "vue";
         };
 
         const REMOVE_CART = async (userId) => {
-            const response = await fetch(`http://10.20.3.151:8060/cart/emptyCart?userId=${userId}`)
-            const data = await response.json()
-            console.log(data)
+            await fetch(`http://10.20.3.151:8060/cart/placeOrder?userId=${userId}`)
         }
         
         const responseBackend = ref({})
@@ -150,7 +151,8 @@ import { reactive, ref } from "vue";
     productSearched,
     SEND_EMAIL,
     REMOVEFROMCART,
-    responseBackend
+    responseBackend,
+    isCartLoaded
     }
 })
 
